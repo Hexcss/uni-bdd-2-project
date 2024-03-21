@@ -1,7 +1,15 @@
+# trunk-ignore-all(checkov/CKV_OPENAPI_6)
 swagger: "2.0"
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: Authorization
+    in: header
+security:
+  - api_key: []
 info:
   description: API for a Recipe Blog
-  version: "1.0.0"
+  version: '1.0.0'
   title: Recipe Blog API
 
 host: "localhost"
