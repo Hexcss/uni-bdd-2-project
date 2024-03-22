@@ -1,0 +1,439 @@
+# trunk-ignore-all(checkov/CKV_OPENAPI_6)
+swagger: "2.0"
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: Authorization
+    in: header
+security:
+  - api_key: []
+info:
+  description: API for a Recipe Blog
+  version: '1.0.0'
+  title: Recipe Blog API
+
+host: "localhost"
+basePath: "/"
+
+schemes:
+  - https
+
+paths:
+  /recipes:
+    get:
+      summary: Get a list of recipes
+      parameters:
+        - name: category
+          in: query
+          required: false
+          type: string
+          description: Filter recipes by category
+      responses:
+        "200":
+          description: An array of recipes
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Recipe"
+        "400":
+          description: Bad request (e.g., malformed request syntax, invalid request message parameters)
+        "401":
+          description: Unauthorized (e.g., missing or invalid authentication token)
+        "404":
+          description: Not found (e.g., no recipes match the given category)
+        "500":
+          description: Internal Server Error
+
+    post:
+      summary: Create a new recipe
+      parameters:
+        - in: body
+          name: recipe
+          description: Recipe to add
+          required: true
+          schema:
+            $ref: "#/definitions/Recipe"
+      responses:
+        "201":
+          description: Created recipe
+          schema:
+            $ref: "#/definitions/Recipe"
+        "400":
+          description: Bad request (e.g., missing required fields in the recipe object)
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden (e.g., user not allowed to create a recipe)
+        "500":
+          description: Internal Server Error
+
+  /recipes/{id}:
+    get:
+      summary: Get a single recipe by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          description: ID of the recipe to retrieve
+      responses:
+        "200":
+          description: A single recipe
+          schema:
+            $ref: "#/definitions/Recipe"
+        "400":
+          description: Bad request (e.g., malformed ID)
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not found (e.g., recipe with given ID does not exist)
+        "500":
+          description: Internal Server Error
+
+    put:
+      summary: Update a recipe by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - in: body
+          name: recipe
+          description: Recipe data to update
+          required: true
+          schema:
+            $ref: "#/definitions/Recipe"
+      responses:
+        "200":
+          description: Updated recipe
+          schema:
+            $ref: "#/definitions/Recipe"
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden (e.g., user not allowed to update this recipe)
+        "404":
+          description: Not found (e.g., recipe with given ID does not exist)
+        "500":
+          description: Internal Server Error
+
+    delete:
+      summary: Delete a recipe by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        "204":
+          description: Recipe deleted
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden (e.g., user not allowed to delete this recipe)
+        "404":
+          description: Not found (e.g., recipe with given ID does not exist)
+        "500":
+          description: Internal Server Error
+
+  /recipes/{id}/image:
+    post:
+      summary: Upload an image for a recipe
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - in: formData
+          name: image
+          type: file
+          description: Image to upload
+          required: true
+      responses:
+        "200":
+          description: Image uploaded successfully
+          schema:
+            type: object
+            properties:
+              imageUrl:
+                type: string
+                description: URL of the uploaded image
+        "400":
+          description: Bad request (e.g., no image file provided)
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden (e.g., user not allowed to upload image)
+        "404":
+          description: Not found (e.g., recipe with given ID does not exist)
+        "500":
+          description: Internal Server Error
+
+    delete:
+      summary: Delete an image of a recipe
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        "204":
+          description: Image deleted
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden (e.g., user not allowed to delete this image)
+        "404":
+          description: Not found (e.g., image or recipe with given ID does not exist)
+        "500":
+          description: Internal Server Error
+
+  /categories:
+    get:
+      summary: Get a list of categories
+      responses:
+        "200":
+          description: An array of categories
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Category"
+        "500":
+          description: Internal Server Error
+    post:
+      summary: Create a new category
+      parameters:
+        - in: body
+          name: category
+          description: Category to add
+          required: true
+          schema:
+            $ref: "#/definitions/Category"
+      responses:
+        "201":
+          description: Created category
+          schema:
+            $ref: "#/definitions/Category"
+        "400":
+          description: Bad request
+        "500":
+          description: Internal Server Error
+
+  /categories/{id}:
+    get:
+      summary: Get a single category by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          description: ID of the category to retrieve
+      responses:
+        "200":
+          description: A single category
+          schema:
+            $ref: "#/definitions/Category"
+        "404":
+          description: Not found
+        "500":
+          description: Internal Server Error
+    put:
+      summary: Update a category by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - in: body
+          name: category
+          description: Category data to update
+          required: true
+          schema:
+            $ref: "#/definitions/Category"
+      responses:
+        "200":
+          description: Updated category
+          schema:
+            $ref: "#/definitions/Category"
+        "400":
+          description: Bad request
+        "404":
+          description: Not found
+        "500":
+          description: Internal Server Error
+    delete:
+      summary: Delete a category by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        "204":
+          description: Category deleted
+        "404":
+          description: Not found
+        "500":
+          description: Internal Server Error
+
+  /tags:
+    get:
+      summary: Get a list of tags
+      responses:
+        "200":
+          description: An array of tags
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Tag"
+        "500":
+          description: Internal Server Error
+    post:
+      summary: Create a new tag
+      parameters:
+        - in: body
+          name: tag
+          description: Tag to add
+          required: true
+          schema:
+            $ref: "#/definitions/Tag"
+      responses:
+        "201":
+          description: Created tag
+          schema:
+            $ref: "#/definitions/Tag"
+        "400":
+          description: Bad request
+        "500":
+          description: Internal Server Error
+
+  /tags/{id}:
+    get:
+      summary: Get a single tag by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          description: ID of the tag to retrieve
+      responses:
+        "200":
+          description: A single tag
+          schema:
+            $ref: "#/definitions/Tag"
+        "404":
+          description: Not found
+        "500":
+          description: Internal Server Error
+    put:
+      summary: Update a tag by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - in: body
+          name: tag
+          description: Tag data to update
+          required: true
+          schema:
+            $ref: "#/definitions/Tag"
+      responses:
+        "200":
+          description: Updated tag
+          schema:
+            $ref: "#/definitions/Tag"
+        "400":
+          description: Bad request
+        "404":
+          description: Not found
+        "500":
+          description: Internal Server Error
+    delete:
+      summary: Delete a tag by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        "204":
+          description: Tag deleted
+        "404":
+          description: Not found
+        "500":
+          description: Internal Server Error
+
+definitions:
+  Recipe:
+    type: object
+    required:
+      - id
+      - title
+      - description
+      - ingredients
+      - tag_ids
+      - steps
+      - category_id
+      - createdAt
+      - updatedAt
+      - authorId
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      ingredients:
+        type: array
+        items:
+          type: string
+      tag_ids:
+        type: array
+        items:
+          type: string
+      steps:
+        type: array
+        items:
+          type: string
+      category_id:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+      authorId:
+        type: string
+
+  Category:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+
+  Tag:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+      name:
+        type: string

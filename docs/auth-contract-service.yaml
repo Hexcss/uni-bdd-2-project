@@ -1,0 +1,116 @@
+swagger: "2.0"
+info:
+  title: "Authentication API"
+  version: "1.0.0"
+  description: "API for handling user authentication and profile management."
+
+basePath: "/api/"
+
+schemes:
+  - "https"
+
+paths:
+  /users/register:
+    post:
+      summary: "Register a new user"
+      description: "Creates a new user account."
+      parameters:
+        - in: "body"
+          name: "user"
+          description: "User to register"
+          required: true
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        201:
+          description: "User created successfully"
+        400:
+          description: "Invalid input data"
+        409:
+          description: "User already exists"
+
+  /users/login:
+    post:
+      summary: "User login"
+      description: "Authenticates a user and returns a token."
+      parameters:
+        - in: "body"
+          name: "credentials"
+          description: "User login credentials"
+          required: true
+          schema:
+            $ref: "#/definitions/Login"
+      responses:
+        200:
+          description: "Login successful"
+          schema:
+            $ref: "#/definitions/Token"
+        401:
+          description: "Unauthorized. Incorrect username or password."
+
+  /users/profile:
+    get:
+      summary: "Get user profile"
+      description: "Returns user's profile information."
+      parameters:
+        - in: "header"
+          name: "Authorization"
+          description: "Bearer <token>"
+          required: true
+      responses:
+        200:
+          description: "Profile information retrieved successfully"
+          schema:
+            $ref: "#/definitions/User"
+        401:
+          description: "Unauthorized. Invalid token."
+
+definitions:
+  User:
+    type: "object"
+    required:
+      - "email"
+      - "password"
+    properties:
+      id:
+        type: "string"
+      email:
+        type: "string"
+      hashedPassword:
+        type: "string"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+
+  Login:
+    type: "object"
+    required:
+      - "email"
+      - "password"
+    properties:
+      email:
+        type: "string"
+      password:
+        type: "string"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string" 
+
+  Token:
+    type: "object"
+    properties:
+      token:
+        type: "string"
+
+tags:
+  - name: "users"
+    description: "Operations about users"
+
+securityDefinitions:
+  Bearer:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+
