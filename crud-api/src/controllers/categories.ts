@@ -1,4 +1,4 @@
-import Category from '../models/category.model'
+import Category from '../models/category'
 import {Request, Response} from 'express';
 
 const getAllCategories = async (req: Request, res: Response): Promise<void> => {

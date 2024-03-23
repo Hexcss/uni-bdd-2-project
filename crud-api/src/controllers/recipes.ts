@@ -1,4 +1,4 @@
-import Recipe from '../models/recipe.model';
+import Recipe from '../models/recipe';
 import {Request, Response} from 'express';
 
 const getAllRecipes = async (req: Request, res: Response): Promise<void> => {

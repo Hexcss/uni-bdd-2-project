@@ -1,4 +1,4 @@
-import Tag from '../models/tag.model';
+import Tag from '../models/tag';
 import {Request, Response} from 'express';
 
 const getAllTags = async (req: Request, res: Response): Promise<void> => {
