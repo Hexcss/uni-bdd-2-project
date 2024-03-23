@@ -1,5 +1,5 @@
 import Tag from '../models/tag';
-import {Request, Response} from 'express';
+import express, {Request, Response} from 'express';
 
 const getAllTags = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -20,7 +20,7 @@ const getAllTags = async (req: Request, res: Response): Promise<void> => {
     }
   }
   
-  const getTagById = async (req: Request, res: Response): Promise<void> => {
+  const getTagById = async (req: Request, res: Response) => {
     try {
       const tag = await Tag.findById(req.params.id);
       if (!tag) {
@@ -32,7 +32,7 @@ const getAllTags = async (req: Request, res: Response): Promise<void> => {
     }
   }
   
-  const updateTag = async (req: Request, res: Response): Promise<void> => {
+  const updateTag = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
       const updatedTag = await Tag.findOneAndUpdate({ id: id }, req.body, {
@@ -47,7 +47,7 @@ const getAllTags = async (req: Request, res: Response): Promise<void> => {
     }
   }
   
-  const deleteTag = async (req: Request, res: Response): Promise<void> => {
+  const deleteTag = async (req: Request, res: Response) => {
     try {
       const { id } = req.params; // Aquí 'id' es el identificador personalizado
       const deletedTag = await Tag.findOneAndDelete({ id: id });
