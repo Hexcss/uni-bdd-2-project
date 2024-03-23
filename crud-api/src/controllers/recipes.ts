@@ -1,5 +1,5 @@
 import Recipe from '../models/recipe';
-import {Request, Response} from 'express';
+import express, {Request, Response} from 'express';
 
 const getAllRecipes = async (req: Request, res: Response): Promise<void> => {
     let query: any = {};
@@ -29,7 +29,7 @@ const createRecipe = async (req: Request, res: Response): Promise<void> => {
 
 }
 
-const getRecipe = async (req: Request, res: Response): Promise<void> => {
+const getRecipe = async (req: Request, res: Response) => {
     try {
       const recipe = await Recipe.findById(req.params.id);
       if (!recipe) {
@@ -43,7 +43,7 @@ const getRecipe = async (req: Request, res: Response): Promise<void> => {
     }
 }
 
-const updateRecipe = async (req: Request, res: Response): Promise<void> => {
+const updateRecipe = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
       const updatedRecipe = await Recipe.findOneAndUpdate({ id }, req.body, {
@@ -58,7 +58,7 @@ const updateRecipe = async (req: Request, res: Response): Promise<void> => {
     }
 }
 
-const deleteRecipe = async (req: Request, res: Response): Promise<void> => {
+const deleteRecipe = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
       const deletedRecipe = await Recipe.findOneAndDelete({ id });
