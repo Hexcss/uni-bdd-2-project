@@ -1,17 +1,7 @@
-import mongoose, {Schema, Document} from 'mongoose';
+import mongoose, {Schema} from 'mongoose';
+import { IRecipe } from '../utils/types';
 
-interface IRecipe extends Document {
-    id: string;
-    title: string;
-    description: string;
-    ingredients: string[];
-    steps: string[];
-    category_id: string[];
-    tag_ids: string[];
-    createdAt: Date;
-    updatedAt: Date;
-    authorId: string;
-}
+
 
 const recipeSchema = new Schema({
     id: {

@@ -1,9 +1,6 @@
-import mongoose, {Schema, Document} from 'mongoose';
+import mongoose, {Schema} from 'mongoose';
+import { ITag } from '../utils/types';
 
-interface ITag extends Document {
-    id: string;
-    name: string;
-}
 
 const tagSchema = new Schema({
     id: {
