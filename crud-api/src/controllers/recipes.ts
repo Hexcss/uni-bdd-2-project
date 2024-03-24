@@ -1,5 +1,5 @@
 import Recipe from '../models/recipe';
-import express, {Request, Response} from 'express';
+import {Request, Response} from 'express';
 
 const getAllRecipes = async (req: Request, res: Response): Promise<void> => {
     let query: any = {};

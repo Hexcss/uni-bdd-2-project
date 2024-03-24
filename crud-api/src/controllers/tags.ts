@@ -1,5 +1,5 @@
 import Tag from '../models/tag';
-import express, {Request, Response} from 'express';
+import {Request, Response} from 'express';
 
 const getAllTags = async (req: Request, res: Response): Promise<void> => {
     try {
