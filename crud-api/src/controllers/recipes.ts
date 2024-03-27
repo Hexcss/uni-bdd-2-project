@@ -24,11 +24,11 @@ const deleteRecipe = async (req: Request, res: Response) => {
 }
 
 const recipesController = {
-    getAllRecipes,
-    createRecipe,
-    getRecipe,
-    updateRecipe,
-    deleteRecipe,
+  getAllRecipes,
+  createRecipe,
+  getRecipe,
+  updateRecipe,
+  deleteRecipe,
 }
 
 export default recipesController;
