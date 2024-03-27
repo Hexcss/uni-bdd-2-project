@@ -146,7 +146,7 @@ const deleteById = async (req: Request, res: Response, dataType: string) => {
 
 }
 
-const crudServices = {
+const CrudServices = {
     create,
     getAll,
     getById,
@@ -154,6 +154,6 @@ const crudServices = {
     deleteById,
 }
 
-export default crudServices;
+export default CrudServices;
 
 
