@@ -9,3 +9,7 @@ export interface ExtendedLogInfo extends winston.Logform.TransformableInfo {
   httpMethod?: string;
   url?: string;
 }
+
+export interface CustomError extends Error {
+  statusCode?: number;
+}

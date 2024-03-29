@@ -1,5 +1,5 @@
 import { format } from 'winston';
-import { ExtendedLogInfo } from '../interfaces';
+import { CustomError, ExtendedLogInfo } from '../interfaces';
 
 export function ensureVariableIsSet(
   variable: string | undefined,
@@ -16,6 +16,22 @@ export function parsePort(port: string | undefined): number {
     throw new Error(`Invalid port number: ${port}`);
   }
   return parsedPort;
+}
+
+export function checkIfIsCustomError(error): error is CustomError {
+  return 'statusCode' in error && 'message' in error;
+}
+
+export function getErrorStatusCodeAndMessage(err: Error) {
+  let statusCode = 500;
+  let message = 'An internal server error occurred';
+
+  if (checkIfIsCustomError(err)) {
+    statusCode = err.statusCode || statusCode;
+    message = err.message || message;
+  }
+
+  return { statusCode, message };
 }
 
 export const formatLogger = format.printf((info: ExtendedLogInfo) => {
