@@ -1,3 +1,6 @@
+import { format } from 'winston';
+import { ExtendedLogInfo } from '../interfaces';
+
 export function ensureVariableIsSet(
   variable: string | undefined,
   name: string
@@ -14,3 +17,7 @@ export function parsePort(port: string | undefined): number {
   }
   return parsedPort;
 }
+
+export const formatLogger = format.printf((info: ExtendedLogInfo) => {
+  return `${info.timestamp} [${info.level}]: ${info.message} ${info.httpMethod ?? ''} ${info.url ?? ''}`;
+});
