@@ -1,6 +1,6 @@
 import { format } from 'winston';
 import { CustomError, ExtendedLogInfo } from '../interfaces';
-
+import { ValidationError } from 'joi';
 export function ensureVariableIsSet(
   variable: string | undefined,
   name: string
@@ -32,6 +32,10 @@ export function getErrorStatusCodeAndMessage(err: Error) {
   }
 
   return { statusCode, message };
+}
+
+export function getValidationErrorMessages(error: ValidationError): string {
+  return error.details.map((detail) => detail.message).join(', ');
 }
 
 export const formatLogger = format.printf((info: ExtendedLogInfo) => {
