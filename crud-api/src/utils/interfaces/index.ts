@@ -1,1 +1,4 @@
-// Index file for src/utils/interfaces
+export interface Environment {
+  port: number;
+  MONGO_URI: string | undefined;
+}
