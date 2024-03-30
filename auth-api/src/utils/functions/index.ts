@@ -10,12 +10,15 @@ export function ensureVariableIsSet(
   }
 }
 
-export function parsePort(port: string | undefined): number {
-  const parsedPort = parseInt(port ?? '8080', 10);
-  if (isNaN(parsedPort)) {
-    throw new Error(`Invalid port number: ${port}`);
+export function parseNumber(
+  number: string | undefined,
+  defaultValue: string
+): number {
+  const parsedNumber = parseInt(number ?? defaultValue, 10);
+  if (isNaN(parsedNumber)) {
+    throw new Error(`Invalid number: ${number}`);
   }
-  return parsedPort;
+  return parsedNumber;
 }
 
 export function checkIfIsCustomError(error): error is CustomError {

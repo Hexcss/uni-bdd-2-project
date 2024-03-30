@@ -6,6 +6,7 @@ export interface Environment {
   MONGO_URI: string | undefined;
   JWT_KEY: string | undefined;
   JWT_ALGORITHM: string | undefined;
+  SALT_ROUNDS: number;
 }
 
 export interface ExtendedLogInfo extends winston.Logform.TransformableInfo {
