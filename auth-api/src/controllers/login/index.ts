@@ -2,9 +2,10 @@ import { Request, Response } from 'express';
 import { compare } from 'bcrypt-ts';
 import { sign } from 'jsonwebtoken';
 import { MongoService } from '../../services/data';
-import { IUser } from '../../utils/interfaces';
 import UserModel from '../../models/user';
 import { environment } from '../../config';
+import { loggingMiddleware } from '../../middlewares';
+import { IUser } from '../../utils/interfaces';
 
 class LoginController {
   private userService: MongoService<IUser>;
@@ -19,6 +20,7 @@ class LoginController {
       const user = await this.userService.findOne({ email });
 
       if (!user || !(await compare(password, user.password))) {
+        loggingMiddleware.logger.warn(`Login failed for user: ${email}`);
         res.status(401).json({ message: 'Authentication failed' });
       }
 
@@ -28,9 +30,11 @@ class LoginController {
         { expiresIn: '2h' }
       );
 
+      loggingMiddleware.logger.info(`User logged in: ${email}`);
+
       res.json({ token });
     } catch (error) {
-      console.error(error);
+      loggingMiddleware.logger.error(`Login error: ${error.message}`);
       res.status(500).send('An error occurred during the login process');
     }
   };
