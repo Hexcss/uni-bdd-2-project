@@ -6,7 +6,7 @@ import UserModel from '../../models/user';
 import { environment } from '../../config';
 import { loggingMiddleware } from '../../middlewares';
 
-export class UserController {
+class UserController {
   private userService: MongoService<IUser>;
 
   constructor() {
@@ -48,3 +48,5 @@ export class UserController {
     }
   };
 }
+
+export default UserController;
