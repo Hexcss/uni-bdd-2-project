@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { IRegister, IUser } from '../../utils/interfaces';
-import { hash } from 'bcrypt-ts';
+import { hash } from 'bcrypt';
 import MongoService from '../../services/data';
 import UserModel from '../../models/user';
 import { environment } from '../../config';

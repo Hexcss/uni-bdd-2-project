@@ -2,11 +2,12 @@ import { Document } from 'mongoose';
 import winston from 'winston';
 
 export interface Environment {
-  port: number;
+  PORT: number;
   MONGO_URI: string | undefined;
   JWT_KEY: string | undefined;
   JWT_ALGORITHM: string | undefined;
   SALT_ROUNDS: number;
+  NODE_ENV: string | undefined;
 }
 
 export interface ExtendedLogInfo extends winston.Logform.TransformableInfo {

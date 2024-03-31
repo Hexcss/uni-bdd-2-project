@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { compare } from 'bcrypt-ts';
+import { compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import MongoService from '../../services/data';
 import UserModel from '../../models/user';
