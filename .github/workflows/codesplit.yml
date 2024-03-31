@@ -25,7 +25,7 @@ jobs:
           FOLDERS="crud-api auth-api"
           for folder in $FOLDERS; do
             # Check if the branch exists
-            if git ls-remote --heads https://github.com/${REPO} $folder | grep $folder; then
+            if git ls-remote --heads https://x-access-token:${ACCESS_TOKEN}@github.com/${REPO} $folder | grep $folder; then
               echo "Branch $folder already exists"
             else
               echo "Branch $folder does not exist, creating from master"
