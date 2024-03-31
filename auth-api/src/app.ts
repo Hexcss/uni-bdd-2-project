@@ -7,15 +7,18 @@ import {
   customCorsMiddleware,
 } from './middlewares';
 import routes from './routes/index';
+import { connectDatabase } from './services/mongo';
 
 const app: Express = express();
 
-app.use(customCorsMiddleware);
-app.use(helmet());
-app.use(express.json());
-app.use(limiter);
-app.use(loggingMiddleware.morganMiddleware);
+connectDatabase().then(() => {
+  app.use(customCorsMiddleware);
+  app.use(helmet());
+  app.use(express.json());
+  app.use(limiter);
+  app.use(loggingMiddleware.morganMiddleware);
 
-app.use('/api', routes, errorHandler);
+  app.use('/api', routes, errorHandler);
+});
 
 export default app;
