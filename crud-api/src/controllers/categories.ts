@@ -1,30 +1,25 @@
-
-import {Request, Response} from 'express';
+import { Request, Response } from 'express';
 import CrudServices from '../services/crudService';
 
-
 const getAllCategories = async (req: Request, res: Response): Promise<void> => {
-  CrudServices.getAll(req, res, "Category");
-}
-
+  CrudServices.getAll(req, res, 'Category');
+};
 
 const createCategory = async (req: Request, res: Response) => {
-  CrudServices.create(req, res, "Category");
-}
-
-
+  CrudServices.create(req, res, 'Category');
+};
 
 const getCategoryById = async (req: Request, res: Response) => {
-  CrudServices.getById(req, res, "Category");
-}
+  CrudServices.getById(req, res, 'Category');
+};
 
 const updateCategory = async (req: Request, res: Response) => {
-  CrudServices.update(req, res, "Category");
-}
+  CrudServices.update(req, res, 'Category');
+};
 
 const deleteCategory = async (req: Request, res: Response) => {
- CrudServices.deleteById(req, res, "Category");
-}
+  CrudServices.deleteById(req, res, 'Category');
+};
 
 const categoriesController = {
   getAllCategories,
@@ -32,6 +27,6 @@ const categoriesController = {
   getCategoryById,
   updateCategory,
   deleteCategory,
-}
+};
 
 export default categoriesController;

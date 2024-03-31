@@ -1,6 +1,6 @@
-import recipesController from "../controllers/recipes";
-import { validateRecipe } from "../middlewares/validation";
-import express from "express";
+import recipesController from '../controllers/recipes';
+import { validateRecipe } from '../middlewares/validation';
+import express from 'express';
 
 const router = express.Router();
 

@@ -1,6 +1,6 @@
-import tagController from "../controllers/tags";
-import { validateTag } from "../middlewares/validation";
-import express from "express";
+import tagController from '../controllers/tags';
+import { validateTag } from '../middlewares/validation';
+import express from 'express';
 
 const router = express.Router();
 
