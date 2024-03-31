@@ -1,0 +1,32 @@
+name: Sync Folders to Branches
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Git
+        run: |
+          git config --global user.name 'Hexcss'
+          git config --global user.email 'cadersuay.javier@gmail.com'
+
+      - name: Push changes to corresponding branches
+        run: |
+          FOLDERS="crud-api auth-api"
+          for folder in $FOLDERS; do
+            if git diff --name-only ${{ github.sha }} ${{ github.event.before }} | grep ^$folder/; then
+              echo "Changes detected in $folder"
+              git subtree split --prefix=$folder -b $folder-branch
+              git push https://x-access-token:${{ secrets.REPO_ACCESS_TOKEN }}@github.com/Hexcss/uni-bdd-2-project.git $folder-branch:$folder
+              git branch -D $folder-branch
+            else
+              echo "No changes in $folder"
+            fi
+          done
