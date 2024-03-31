@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { MongoService } from '../../services/data';
+import MongoService from '../../services/data';
 import UserModel from '../../models/user';
 import { IUser } from '../../utils/interfaces';
 import loggingMiddleware from '../../middlewares/logger/index';

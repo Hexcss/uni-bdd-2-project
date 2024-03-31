@@ -1,1 +1,1 @@
-// Index file for src/services
+export { default as MongoService } from './data';

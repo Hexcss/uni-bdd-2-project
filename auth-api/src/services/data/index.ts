@@ -1,6 +1,6 @@
 import { Document, Model } from 'mongoose';
 
-export class MongoService<T extends Document> {
+class MongoService<T extends Document> {
   private model: Model<T>;
 
   constructor(model: Model<T>) {
@@ -32,3 +32,5 @@ export class MongoService<T extends Document> {
     return this.model.deleteOne(filter).exec();
   }
 }
+
+export default MongoService;
