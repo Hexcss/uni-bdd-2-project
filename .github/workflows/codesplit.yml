@@ -18,14 +18,37 @@ jobs:
           git config --global user.email 'cadersuay.javier@gmail.com'
 
       - name: Push changes to corresponding branches
+        env:
+          REPO: Hexcss/uni-bdd-2-project.git
+          ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
         run: |
           FOLDERS="crud-api auth-api"
           for folder in $FOLDERS; do
+            # Check if the branch exists
+            if git ls-remote --heads https://github.com/${REPO} $folder | grep $folder; then
+              echo "Branch $folder already exists"
+            else
+              echo "Branch $folder does not exist, creating from master"
+              git subtree split --prefix=$folder -b $folder-branch
+              git push https://x-access-token:${ACCESS_TOKEN}@github.com/${REPO} $folder-branch:$folder
+              git branch -D $folder-branch
+              continue # Move to the next iteration without checking for changes
+            fi
+
+            # If branch exists, check for changes and sync
             if git diff --name-only ${{ github.sha }} ${{ github.event.before }} | grep ^$folder/; then
               echo "Changes detected in $folder"
-              git subtree split --prefix=$folder -b $folder-branch
-              git push https://x-access-token:${{ secrets.REPO_ACCESS_TOKEN }}@github.com/Hexcss/uni-bdd-2-project.git $folder-branch:$folder
-              git branch -D $folder-branch
+              # Temporarily clone the branch to manipulate folder structure
+              git checkout -b temp-branch $folder
+              git rm -r *
+              git checkout master -- $folder
+              mv $folder/* .
+              rmdir $folder
+              git add .
+              git commit -m "Syncing $folder contents to root of $folder branch"
+              git push origin temp-branch:$folder
+              git checkout master
+              git branch -D temp-branch
             else
               echo "No changes in $folder"
             fi
