@@ -1,15 +1,24 @@
-import express, { Express, Request, Response } from 'express';
-import cors from 'cors';
+import express, { Express } from 'express';
 import helmet from 'helmet';
+import {
+  errorHandler,
+  limiter,
+  loggingMiddleware,
+  customCorsMiddleware,
+} from './middlewares';
+import routes from './routes/index';
+import { connectDatabase } from './services/mongo';
 
 const app: Express = express();
 
-app.use(cors());
-app.use(helmet());
+connectDatabase().then(() => {
+  app.use(customCorsMiddleware);
+  app.use(helmet());
+  app.use(express.json());
+  app.use(limiter);
+  app.use(loggingMiddleware.morganMiddleware);
 
-// Example route
-app.get('/example', (req: Request, res: Response) => {
-  res.json({ message: 'This is an example route!' });
+  app.use('/api', routes, errorHandler);
 });
 
 export default app;
