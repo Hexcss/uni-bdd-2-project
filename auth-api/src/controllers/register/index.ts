@@ -1,10 +1,9 @@
 import { Request, Response } from 'express';
 import { IRegister, IUser } from '../../utils/interfaces';
-import { hash } from 'bcrypt';
 import MongoService from '../../services/data';
 import UserModel from '../../models/user';
-import { environment } from '../../config';
 import { loggingMiddleware } from '../../middlewares';
+import { EncryptionService } from '../../services';
 
 class UserController {
   private userService: MongoService<IUser>;
@@ -26,7 +25,7 @@ class UserController {
         return;
       }
 
-      const hashedPassword = await hash(password, environment.SALT_ROUNDS);
+      const hashedPassword = await EncryptionService.hashPassword(password);
       const newUser = await this.userService.create({
         email,
         password: hashedPassword,

@@ -1,11 +1,10 @@
 import { Request, Response } from 'express';
-import { compare } from 'bcrypt';
-import { sign } from 'jsonwebtoken';
 import MongoService from '../../services/data';
 import UserModel from '../../models/user';
-import { environment } from '../../config';
-import { loggingMiddleware } from '../../middlewares';
 import { IUser } from '../../utils/interfaces';
+import { environment } from '../../config';
+import { EncryptionService, JwtService } from '../../services';
+import { loggingMiddleware } from '../../middlewares';
 
 class LoginController {
   private userService: MongoService<IUser>;
@@ -14,54 +13,40 @@ class LoginController {
     this.userService = new MongoService<IUser>(UserModel);
   }
 
-  private async verifyUser(
+  private async authenticateUser(
     email: string,
     password: string
   ): Promise<IUser | null> {
     const user = await this.userService.findOne({ email });
-    if (!user || !(await compare(password, user.password))) {
+    if (
+      !user ||
+      !(await EncryptionService.verifyPassword(password, user.password))
+    ) {
       return null;
     }
     return user;
   }
 
-  private generateToken(user: IUser): Promise<string> {
-    const tokenPayload = {
-      userId: user._id,
-      email: user.email,
-    };
-    const tokenExpiration = environment.JWT_EXPIRATION;
-
-    return new Promise((resolve, reject) => {
-      sign(
-        tokenPayload,
-        environment.JWT_KEY,
-        { expiresIn: tokenExpiration },
-        (err, token) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(token);
-          }
-        }
-      );
-    });
+  private async generateLoginResponse(
+    user: IUser
+  ): Promise<{ token: string; expiresIn: string | undefined }> {
+    const token = await JwtService.generateToken(user);
+    return { token, expiresIn: environment.JWT_EXPIRATION };
   }
 
   public login = async (req: Request, res: Response): Promise<void> => {
     try {
       const { email, password } = req.body;
-      const user = await this.verifyUser(email, password);
+      const user = await this.authenticateUser(email, password);
 
       if (!user) {
         loggingMiddleware.logger.warn(`Login failed for user: ${email}`);
         res.status(401).json({ message: 'Authentication failed' });
-        return;
       }
 
-      const token = await this.generateToken(user);
+      const loginResponse = await this.generateLoginResponse(user);
       loggingMiddleware.logger.info(`User logged in: ${email}`);
-      res.json({ token, expiresIn: environment.JWT_EXPIRATION });
+      res.json(loginResponse);
     } catch (error) {
       loggingMiddleware.logger.error(`Login error: ${error.message}`);
       res.status(500).send('An error occurred during the login process');

@@ -2,7 +2,7 @@ import { sign } from 'jsonwebtoken';
 import { environment } from '../../config';
 import { IUser } from '../../utils/interfaces';
 
-export class JwtService {
+class JwtService {
   static generateToken(user: IUser): Promise<string> {
     const tokenPayload = {
       userId: user._id,
@@ -26,3 +26,5 @@ export class JwtService {
     });
   }
 }
+
+export default JwtService;

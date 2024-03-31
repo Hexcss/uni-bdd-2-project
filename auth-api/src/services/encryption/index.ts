@@ -1,9 +1,10 @@
 import { compare, hash } from 'bcrypt';
+import { environment } from '../../config';
 
 class EncryptionService {
   static async hashPassword(
     password: string,
-    saltRounds = 10
+    saltRounds = environment.SALT_ROUNDS
   ): Promise<string> {
     return hash(password, saltRounds);
   }
