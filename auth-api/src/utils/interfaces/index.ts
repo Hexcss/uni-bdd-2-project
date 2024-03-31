@@ -5,7 +5,7 @@ export interface Environment {
   PORT: number;
   MONGO_URI: string | undefined;
   JWT_KEY: string | undefined;
-  JWT_ALGORITHM: string | undefined;
+  JWT_EXPIRATION: string | undefined;
   SALT_ROUNDS: number;
   NODE_ENV: string | undefined;
 }

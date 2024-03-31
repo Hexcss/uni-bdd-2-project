@@ -8,7 +8,7 @@ export const environment: Environment = {
   PORT: parseNumber(process.env.PORT, '8080'),
   MONGO_URI: process.env.MONGO_URI,
   JWT_KEY: process.env.JWT_KEY,
-  JWT_ALGORITHM: process.env.JWT_ALGORITHM,
+  JWT_EXPIRATION: process.env.JWT_EXPIRATION,
   SALT_ROUNDS: parseNumber(process.env.SALT_ROUNDS, '10'),
   NODE_ENV: process.env.NODE_ENV,
 };

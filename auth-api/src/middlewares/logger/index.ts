@@ -9,8 +9,8 @@ const logger = winston.createLogger({
     formatLogger
   ),
   transports: [
-    new transports.File({ filename: 'combined.log', level: 'info' }),
-    new transports.File({ filename: 'errors.log', level: 'error' }),
+    new transports.File({ filename: 'logs/combined.log', level: 'info' }),
+    new transports.File({ filename: 'logs/errors.log', level: 'error' }),
     new transports.Console({
       format: format.combine(format.colorize({ all: true }), formatLogger),
     }),
