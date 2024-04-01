@@ -12,6 +12,7 @@ import {
 const app: Express = express();
 
 connectDatabase().then(() => {
+  app.set('trust proxy', 1);
   app.use(corsMiddleware);
   app.use(helmet());
   app.use(express.json());
