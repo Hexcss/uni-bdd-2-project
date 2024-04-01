@@ -1,14 +1,20 @@
-import express, { Express, Request, Response } from 'express';
-import cors from 'cors';
+import express, { Express } from 'express';
 import helmet from 'helmet';
+import { corsMiddleware, loggingMiddleware } from './middlewares';
+import { connectDatabase } from './services';
+import limiter from './middlewares/limiter';
+import configureRoutes from './routes';
 
 const app: Express = express();
 
-app.use(cors());
-app.use(helmet());
+connectDatabase().then(() => {
+  app.use(corsMiddleware);
+  app.use(helmet());
+  app.use(express.json());
+  app.use(limiter);
+  app.use(loggingMiddleware.morganMiddleware);
 
-app.get('/example', (req: Request, res: Response) => {
-  res.json({ message: 'This is an example route!' });
+  configureRoutes(app);
 });
 
 export default app;
