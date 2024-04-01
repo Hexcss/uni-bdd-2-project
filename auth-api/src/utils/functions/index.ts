@@ -11,9 +11,12 @@ export function ensureVariableIsSet(
 }
 
 export function parseNumber(
-  number: string | undefined,
+  number: string | number | undefined,
   defaultValue: string
 ): number {
+  if (typeof number === 'number') {
+    return number;
+  }
   const parsedNumber = parseInt(number ?? defaultValue, 10);
   if (isNaN(parsedNumber)) {
     throw new Error(`Invalid number: ${number}`);
