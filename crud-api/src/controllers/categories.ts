@@ -24,7 +24,7 @@ const createCategory = async (req: Request, res: Response): Promise<void> => {
 
 const getCategoryById = async (req: Request, res: Response): Promise<void> => {
   try {
-    const category = await categoryService.findOne({ _id: req.params.id });
+    const category = await categoryService.findOne({ id: req.params.id });
     if (!category) {
       res.status(404).send('Category not found');
       return;
