@@ -1,3 +1,3 @@
-import app from './dist/app.js';
+const app = require('./dist/app.js');
 
-export const service = app;
+exports.service = app.default;
