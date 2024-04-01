@@ -1,4 +1,4 @@
-import morgan, { TokenIndexer } from 'morgan';
+import morgan from 'morgan';
 import winston, { format, transports } from 'winston';
 import { formatLogger } from '../../utils/functions';
 
@@ -9,16 +9,16 @@ const logger = winston.createLogger({
     formatLogger
   ),
   transports: [
-    new transports.File({ filename: 'combined.log', level: 'info' }),
-    new transports.File({ filename: 'errors.log', level: 'error' }),
+    new transports.File({ filename: 'logs/combined.log', level: 'info' }),
+    new transports.File({ filename: 'logs/errors.log', level: 'error' }),
     new transports.Console({
       format: format.combine(format.colorize({ all: true }), formatLogger),
     }),
   ],
 });
 
-const morganMiddleware = morgan<TokenIndexer>(
-  (tokens, req: Request, res: Response) => {
+const morganMiddleware = morgan(
+  (tokens, req, res) => {
     return [
       tokens.date(req, res, 'iso'),
       `[${tokens.method(req, res)}]:`,
@@ -29,6 +29,5 @@ const morganMiddleware = morgan<TokenIndexer>(
   },
   { stream: { write: (message: string) => logger.info(message.trim()) } }
 );
-
 const loggingMiddleware = { logger, morganMiddleware };
 export default loggingMiddleware;

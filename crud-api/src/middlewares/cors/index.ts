@@ -34,4 +34,6 @@ const corsOptionsDelegate = (
   callback(null, corsOptions);
 };
 
-export const customCorsMiddleware = cors(corsOptionsDelegate);
+const customCorsMiddleware = cors(corsOptionsDelegate);
+
+export default customCorsMiddleware;
