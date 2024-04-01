@@ -1,1 +1,2 @@
-// Index file for src/services
+export { default as MongoService } from './data';
+export { default as connectDatabase } from './db/index';

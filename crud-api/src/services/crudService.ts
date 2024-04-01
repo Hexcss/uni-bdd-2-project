@@ -37,11 +37,11 @@ const getAll = async (req: Request, res: Response, dataType: string) => {
         break;
       }
       case 'Recipe': {
-        let query: any = {};
+        const query: { category_id?: string } = {};
         if (req.query.category) {
-          query.category_id = req.query.category;
+          query.category_id = req.query.category as string;
         }
-        gottenData = await Recipe.find();
+        gottenData = await Recipe.find(query);
         break;
       }
       case 'Tag': {

@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import { ICategory } from '../utils/types';
 
 const categorySchema: Schema = new Schema({

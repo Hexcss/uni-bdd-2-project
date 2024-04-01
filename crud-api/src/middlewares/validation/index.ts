@@ -1,6 +1,6 @@
-import categorySchema from '../utils/schemas/category';
-import recipeSchema from '../utils/schemas/recipe';
-import tagSchema from '../utils/schemas/tag';
+import categorySchema from '../../utils/schemas/category';
+import recipeSchema from '../../utils/schemas/recipe';
+import tagSchema from '../../utils/schemas/tag';
 import { Request, Response, NextFunction } from 'express';
 
 const validateCategory = (req: Request, res: Response, next: NextFunction) => {
@@ -30,4 +30,4 @@ const validateTag = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export { validateCategory, validateRecipe, validateTag };
+export default { validateCategory, validateRecipe, validateTag };
