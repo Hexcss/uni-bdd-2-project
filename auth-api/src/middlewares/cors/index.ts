@@ -1,5 +1,6 @@
 import cors, { CorsOptions, CorsRequest } from 'cors';
 import loggingMiddleware from '../logger/index';
+import { environment } from '../../config';
 
 const allowedOrigins: string[] =
   process.env.ALLOWED_ORIGINS?.split(',').filter(
@@ -14,7 +15,7 @@ const corsOptionsDelegate = (
 ): void => {
   let corsOptions: CorsOptions;
 
-  if (process.env.NODE_ENV === 'development') {
+  if (environment.NODE_ENV === 'development') {
     corsOptions = { origin: true };
   } else {
     const requestOrigin = req.headers.origin;
