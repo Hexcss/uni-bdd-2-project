@@ -16,6 +16,7 @@ steps:
       - '--entry-point=service'
       - '--allow-unauthenticated'
       - '--project=$_GCLOUD_PROJECT'
+      - '--vpc-connector=$_VPC_CONNECTOR'
       - '--set-secrets=NODE_ENV=GUSTUS_NODE_ENV:latest'
       - '--set-secrets=MONGO_URI=GUSTUS_MONGO_URI:latest'
       - '--set-secrets=JWT_KEY=GUSTUS_JWT_KEY:latest'
