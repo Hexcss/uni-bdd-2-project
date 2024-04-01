@@ -12,6 +12,7 @@ import { connectDatabase } from './services/mongo';
 const app: Express = express();
 
 connectDatabase().then(() => {
+  app.set('trust proxy', 1);
   app.use(customCorsMiddleware);
   app.use(helmet());
   app.use(express.json());
