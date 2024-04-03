@@ -1,0 +1,105 @@
+---
+import MenuCard from "../cards/MenuCard.astro";
+import burger from "../../assets/images/buger.jpg";
+import pasta from "../../assets/images/pasta.jpg";
+import lasagna from "../../assets/images/lasagna.webp";
+import drink from "../../assets/images/chocolate_Drink.jpg";
+import pizza from "../../assets/images/pizza.jpg";
+import hotdog from "../../assets/images/Hot_dog.jpg";
+import juse from "../../assets/images/juse.jpg";
+import biryani from "../../assets/images/biryani.webp";
+import chocolate from "../../assets/images/chocolate.jpg";
+
+const cards = [
+  {
+    image: burger,
+    title: "Buger",
+    price: "$20.00",
+    description:
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum assumenda voluptates",
+    rating: 4,
+  },
+  {
+    image: pasta,
+    title: "Pasta",
+    price: "$20.00",
+    description:
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum assumenda voluptates",
+    rating: 4,
+  },
+  {
+    image: lasagna,
+    title: "Lasagna",
+    price: "$20.00",
+    description:
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum assumenda voluptates",
+    rating: 4,
+  },
+  {
+    image: drink,
+    title: "Drink",
+    price: "$20.00",
+    description:
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum assumenda voluptates",
+    rating: 4,
+  },
+  {
+    image: pizza,
+    title: "Pizza",
+    price: "$20.00",
+    description:
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum assumenda voluptates",
+    rating: 4,
+  },
+  {
+    image: hotdog,
+    title: "Hot Dog",
+    price: "$20.00",
+    description:
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum assumenda voluptates",
+    rating: 4,
+  },
+  {
+    image: juse,
+    title: "Juse",
+    price: "$20.00",
+    description:
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum assumenda voluptates",
+    rating: 4,
+  },
+  {
+    image: biryani,
+    title: "Biryani",
+    price: "$20.00",
+    description:
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum assumenda voluptates",
+    rating: 4,
+  },
+  {
+    image: chocolate,
+    title: "Chocolate",
+    price: "$20.00",
+    description:
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum assumenda voluptates",
+    rating: 4,
+  },
+];
+---
+
+<div class="menu" id="Menu">
+  <h1>Our<span>Menu</span></h1>
+
+  <div class="menu_box">
+    {
+      cards.map((card) => (
+        <MenuCard
+          image={card.image}
+          title={card.title}
+          price={card.price}
+          description={card.description}
+          rating={card.rating}
+        />
+      ))
+    }
+  </div>
+</div>

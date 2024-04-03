@@ -34,14 +34,14 @@ class LoginController {
     return { token, expiresIn: environment.JWT_EXPIRATION };
   }
 
-  public login = async (req: Request, res: Response): Promise<void> => {
+  public login = async (req: Request, res: Response) => {
     try {
       const { email, password } = req.body;
       const user = await this.authenticateUser(email, password);
 
       if (!user) {
         loggingMiddleware.logger.warn(`Login failed for user: ${email}`);
-        res.status(401).json({ message: 'Authentication failed' });
+        return res.status(401).json({ message: 'Authentication failed' });
       }
 
       const loginResponse = await this.generateLoginResponse(user);

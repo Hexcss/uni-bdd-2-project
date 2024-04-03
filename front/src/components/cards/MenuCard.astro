@@ -1,0 +1,40 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+    image: ImageMetadata;
+    title: string;
+    description: string;
+    price: string;
+    rating: number;
+}
+
+const { image, title, description, price, rating } = Astro.props as Props;
+
+
+---
+<div class="menu_card">
+
+    <div class="menu_image">
+        <Image src={image} alt={title} height={300} width={245}/>
+    </div>
+
+    <div class="small_card">
+        <i class="fa-solid fa-heart"></i>
+    </div>
+
+    <div class="menu_info">
+        <h2>{title}</h2>
+        <p>
+            {description}
+        </p>
+        <h3>{price}</h3>
+        <div class="menu_icon">
+            {Array.from({ length: rating }).map(() => (
+                <i class="fa-solid fa-star"></i>
+            ))}
+        </div>
+        <a href="#" class="menu_btn">Order Now</a>
+    </div>
+
+</div> 
