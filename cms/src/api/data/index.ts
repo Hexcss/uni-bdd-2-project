@@ -22,12 +22,34 @@ export async function getData(
   }
 }
 
+export async function getSingleData(
+  type: string,
+  id: string
+): Promise<ITag | ICategory | IRecipe | null> {
+  const encryptedToken = localStorage.getItem("token");
+  const authToken = encryptedToken ? decryptToken(encryptedToken) : "";
+
+  try {
+    const { data } = await axios.get(`${environment.CRUD_API_URL}/${type}/${id}`, {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
+    delete data.__v;
+    delete data._id;
+    return data;
+  } catch (error) {
+    console.error("Login error:", error);
+    return null;
+  }
+}
+
 export async function postData(
   body: ITag | ICategory | IRecipe,
   type: string
 ): Promise<boolean | null> {
   const encryptedToken = localStorage.getItem("token");
-  const authToken = encryptedToken ? decryptToken(encryptedToken) : "";
+  const authToken = encryptedToken ? decryptToken(encryptedToken) : ""
 
   try {
     await axios.post(`${environment.CRUD_API_URL}/${type}`, body, {

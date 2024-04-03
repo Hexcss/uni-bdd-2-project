@@ -38,7 +38,7 @@ const getCategoryById = async (req: Request, res: Response): Promise<void> => {
 const updateCategory = async (req: Request, res: Response): Promise<void> => {
   try {
     const category = await categoryService.update(
-      { _id: req.params.id },
+      { id: req.params.id },
       req.body
     );
     if (!category) {
@@ -53,7 +53,7 @@ const updateCategory = async (req: Request, res: Response): Promise<void> => {
 
 const deleteCategory = async (req: Request, res: Response): Promise<void> => {
   try {
-    const result = await categoryService.delete({ _id: req.params.id });
+    const result = await categoryService.delete({ id: req.params.id });
     if (result?.deletedCount === 0) {
       res.status(404).send('Category not found');
       return;

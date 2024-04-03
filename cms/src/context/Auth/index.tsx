@@ -10,6 +10,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const token = encryptedToken ? decryptToken(encryptedToken) : null;
   const isAuthenticated = !!token && !isTokenExpired(token);
+  const userId = isAuthenticated ? getUserId(token) : undefined;
 
   function login(newToken: string) {
     const encrypted = encryptToken(newToken);
@@ -31,8 +32,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     return false;
   }
 
+  function getUserId(token: string): string {
+    const decoded: { userId: string } = jwtDecode(token);
+    return decoded.userId;
+  }
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, userId, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

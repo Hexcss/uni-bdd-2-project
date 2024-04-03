@@ -19,7 +19,12 @@ const create = async (req: Request, res: Response, dataType: string) => {
         newData = new Tag(req.body);
         break;
       }
+      default: {
+        return;
+      }
     }
+
+    console.log(newData);
 
     const savedData = await newData.save();
     res.status(201).json(savedData);
@@ -61,15 +66,15 @@ const getById = async (req: Request, res: Response, dataType: string) => {
     let foundData = undefined;
     switch (dataType) {
       case 'Category': {
-        foundData = await Category.findById(req.params.id);
+        foundData = await Category.findOne({ id: req.params.id });
         break;
       }
       case 'Recipe': {
-        foundData = await Recipe.findById(req.params.id);
+        foundData = await Recipe.findOne({ id: req.params.id });
         break;
       }
       case 'Tag': {
-        foundData = await Tag.findById(req.params.id);
+        foundData = await Tag.findOne({ id: req.params.id });
         break;
       }
     }

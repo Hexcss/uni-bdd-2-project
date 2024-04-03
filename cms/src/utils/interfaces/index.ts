@@ -13,6 +13,7 @@ export interface Environment {
 
 export interface AuthContextType {
   isAuthenticated: boolean;
+  userId: string | undefined;
   login: (token: string) => void;
   logout: () => void;
 }
