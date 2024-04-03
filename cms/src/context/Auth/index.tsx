@@ -1,22 +1,25 @@
 import React, { createContext, useState } from 'react';
 import { AuthContextType, AuthProviderProps } from "../../utils/interfaces";
 import { jwtDecode } from 'jwt-decode';
+import { decryptToken, encryptToken } from '../../utils/functions';
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
+  const [encryptedToken, setEncryptedToken] = useState<string | null>(localStorage.getItem('token'));
 
+  const token = encryptedToken ? decryptToken(encryptedToken) : null;
   const isAuthenticated = !!token && !isTokenExpired(token);
 
   function login(newToken: string) {
-    localStorage.setItem('token', newToken);
-    setToken(newToken);
+    const encrypted = encryptToken(newToken);
+    localStorage.setItem('token', encrypted);
+    setEncryptedToken(encrypted);
   }
 
   function logout() {
     localStorage.removeItem('token');
-    setToken(null);
+    setEncryptedToken(null);
   }
 
   function isTokenExpired(token: string): boolean {

@@ -1,79 +1,70 @@
-import React, { useState } from 'react';
-import { Button, TextField, Typography, Container, Box } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { LoginFormState } from '../../utils/interfaces';
-import { useAuth } from '../../context';
-import { authenticateUser } from '../../api/auth';
+import React from 'react';
+import { Button, TextField, Typography, Box, Card, CardContent } from '@mui/material';
+import { useLogin } from '../../hooks/useLogin'; 
+import BackgroundImage from "../../assets/login-bg.png"; // Ensure this path is correct
 
 const Login: React.FC = () => {
-  const [formState, setFormState] = useState<LoginFormState>({ email: '', password: '' });
-  const navigate = useNavigate();
-  const { login } = useAuth();
+  const { formState, handleInputChange, handleSubmit, error } = useLogin();
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormState({ ...formState, [name]: value });
-  };
-
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    const token = await authenticateUser(formState.email, formState.password);
-    if (token) {
-      login(token);
-      navigate('/dashboard');
-    } else {
-      console.error('Authentication failed');
-    }
-  };
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            value={formState.email}
-            onChange={handleInputChange}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={formState.password}
-            onChange={handleInputChange}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Sign In
-          </Button>
-        </Box>
-      </Box>
-    </Container>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundImage: `url(${BackgroundImage})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+      }}
+    >
+      <Card sx={{ width: 450, boxShadow: 3, paddingY: 6 }}>
+        <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 4 }}>
+          <Typography variant='h3' gutterBottom>
+            Gustus CMS
+          </Typography>
+          <Typography variant="h6" color="text.secondary" component="div" sx={{ margin: '20px 0' }}>
+            Sign in to your account
+          </Typography>
+          <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%', mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              value={formState.email}
+              onChange={handleInputChange}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={formState.password}
+              onChange={handleInputChange}
+            />
+            {error && (
+              <Typography color="error" sx={{ mt: 2 }}>
+                {error}
+              </Typography>
+            )}
+            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+              Log In
+            </Button>
+          </Box>
+        </CardContent>
+      </Card>
+    </Box>
   );
 };
 

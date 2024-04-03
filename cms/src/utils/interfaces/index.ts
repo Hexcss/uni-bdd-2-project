@@ -8,6 +8,7 @@ export interface LoginFormState {
 export interface Environment {
   AUTH_API_URL: string | undefined;
   CRUD_API_URL: string | undefined;
+  SECRET_KEY: string | undefined;
 }
 
 export interface AuthContextType {
@@ -18,4 +19,32 @@ export interface AuthContextType {
 
 export interface AuthProviderProps {
   children: ReactNode;
+}
+
+export interface DashboardSectionProps {
+  title: string;
+}
+
+export interface IRecipe {
+  id: string;
+  name: string;
+  description: string;
+  ingredients: string[];
+  tag_ids: string[];
+  steps: string[];
+  category_id: string;
+  createdAt: string; 
+  updatedAt: string; 
+  authorId: string;
+}
+
+export interface ICategory {
+  id: string; 
+  name: string;
+  description?: string; 
+}
+
+export interface ITag {
+  id: string;
+  name: string;
 }

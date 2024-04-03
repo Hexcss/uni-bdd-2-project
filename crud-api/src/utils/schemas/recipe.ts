@@ -2,7 +2,7 @@ import Joi from 'joi';
 
 const recipeSchema = Joi.object({
   id: Joi.string().alphanum().trim().min(6).required(),
-  title: Joi.string().min(3).required(),
+  name: Joi.string().min(3).required(),
   description: Joi.string().allow('', null),
   ingredients: Joi.array().items(Joi.string().min(3)),
   steps: Joi.array().items(Joi.string().min(3)),
