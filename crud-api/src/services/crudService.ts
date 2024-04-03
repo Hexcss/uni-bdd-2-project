@@ -2,6 +2,7 @@ import Category from '../models/category';
 import Recipe from '../models/recipe';
 import Tag from '../models/tag';
 import { Request, Response } from 'express';
+import { escapeRegExp } from 'lodash';
 
 const create = async (req: Request, res: Response, dataType: string) => {
   try {
@@ -34,28 +35,48 @@ const create = async (req: Request, res: Response, dataType: string) => {
 };
 
 const getAll = async (req: Request, res: Response, dataType: string) => {
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 10;
+  const skipIndex = (page - 1) * limit;
+  const search = req.query.search as string;
+
   try {
+    let filter = {};
+    if (search) {
+      const escapedSearch = escapeRegExp(search);
+      filter = {
+        name: { $regex: new RegExp(escapedSearch, 'i') },
+      };
+    }
+
     let gottenData = undefined;
+    let totalCount = 0;
+
     switch (dataType) {
       case 'Category': {
-        gottenData = await Category.find();
+        totalCount = await Category.countDocuments(filter);
+        gottenData = await Category.find(filter)
+          .limit(limit)
+          .skip(skipIndex)
+          .exec();
         break;
       }
       case 'Recipe': {
-        const query: { category_id?: string } = {};
-        if (req.query.category) {
-          query.category_id = req.query.category as string;
-        }
-        gottenData = await Recipe.find(query);
+        totalCount = await Recipe.countDocuments(filter);
+        gottenData = await Recipe.find(filter)
+          .limit(limit)
+          .skip(skipIndex)
+          .exec();
         break;
       }
       case 'Tag': {
-        gottenData = await Tag.find();
+        totalCount = await Tag.countDocuments(filter);
+        gottenData = await Tag.find(filter).limit(limit).skip(skipIndex).exec();
         break;
       }
     }
 
-    res.json(gottenData);
+    res.json({ data: gottenData, totalCount });
   } catch (error) {
     res.status(500).send({ message: error.message });
   }

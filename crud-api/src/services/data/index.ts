@@ -1,4 +1,5 @@
 import { Document, Model } from 'mongoose';
+import { escapeRegExp } from 'lodash';
 
 class MongoService<T extends Document> {
   private model: Model<T>;
@@ -12,11 +13,30 @@ class MongoService<T extends Document> {
   }
 
   async find(
-    filter: object,
+    filter: object = {},
+    page: number = 1,
+    limit: number = 10,
     projection?: object | null,
-    options?: object | null
-  ): Promise<T[]> {
-    return this.model.find(filter, projection, options).exec();
+    options?: object | null,
+    searchTerm?: string
+  ): Promise<{ data: T[]; totalCount: number }> {
+    const skipIndex = (page - 1) * limit;
+
+    if (searchTerm && searchTerm.trim()) {
+      const escapedSearchTerm = escapeRegExp(searchTerm.trim());
+      filter = {
+        ...filter,
+        name: { $regex: new RegExp(escapedSearchTerm, 'i') },
+      };
+    }
+
+    const data = await this.model
+      .find(filter, projection, { ...options, limit, skip: skipIndex })
+      .exec();
+
+    const totalCount = await this.model.countDocuments(filter);
+
+    return { data, totalCount };
   }
 
   async create(doc: object): Promise<T> {

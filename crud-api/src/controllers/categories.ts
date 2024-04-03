@@ -5,9 +5,20 @@ import { CategoryModel } from '../models';
 const categoryService = new MongoService(CategoryModel);
 
 const getAllCategories = async (req: Request, res: Response): Promise<void> => {
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 10;
+  const search = req.query.search as string; // Extract search term from query parameters
+
   try {
-    const categories = await categoryService.find({});
-    res.json(categories);
+    const { data, totalCount } = await categoryService.find(
+      {},
+      page,
+      limit,
+      null,
+      null,
+      search
+    );
+    res.json({ data, totalCount });
   } catch (error) {
     res.status(500).send(error.message);
   }
