@@ -337,3 +337,107 @@
 05-04-2024 00:19:38 [info]: 2024-04-04T22:19:38.492Z [GET]: /api/server/recipe-images/recipe0001 Status: 200 3.360ms  
 05-04-2024 00:19:38 [info]: 2024-04-04T22:19:38.494Z [GET]: /api/server/recipe-images/uSkBMJOSiO Status: 200 3.078ms  
 05-04-2024 00:23:29 [info]: Connected to MongoDB  
+05-04-2024 01:03:41 [info]: Connected to MongoDB  
+05-04-2024 01:19:09 [info]: Connected to MongoDB  
+05-04-2024 01:19:12 [info]: Connected to MongoDB  
+05-04-2024 01:19:21 [info]: Connected to MongoDB  
+05-04-2024 01:19:47 [info]: Retrieved images for recipe recipe0001  
+05-04-2024 01:19:47 [info]: 2024-04-04T23:19:47.437Z [GET]: /api/recipe-images/recipe0001 Status: 304 27.268ms  
+05-04-2024 01:19:50 [info]: Retrieved images for recipe recipe0001  
+05-04-2024 01:19:50 [info]: 2024-04-04T23:19:50.646Z [GET]: /api/recipe-images/recipe0001 Status: 304 16.545ms  
+05-04-2024 01:19:51 [info]: 2024-04-04T23:19:51.812Z [GET]: /api/recipe-images Status: 404 2.382ms  
+05-04-2024 01:19:54 [info]: Retrieved images for recipe uSkBMJOSiO  
+05-04-2024 01:19:54 [info]: 2024-04-04T23:19:54.641Z [GET]: /api/recipe-images/uSkBMJOSiO Status: 200 7.391ms  
+05-04-2024 01:19:55 [info]: 2024-04-04T23:19:55.659Z [GET]: /api/recipe-images Status: 404 1.293ms  
+05-04-2024 01:19:58 [info]: Retrieved images for category 705tANPCUM  
+05-04-2024 01:19:58 [info]: 2024-04-04T23:19:58.643Z [GET]: /api/category-images/705tANPCUM Status: 304 8.755ms  
+05-04-2024 01:20:02 [error]: Error uploading image for category 705tANPCUM: CategoryImage validation failed: imageData: Path `imageData` is required.  
+05-04-2024 01:20:02 [info]: 2024-04-04T23:20:02.613Z [POST]: /api/category-images Status: 500 12.413ms  
+05-04-2024 01:21:13 [info]: Connected to MongoDB  
+05-04-2024 01:21:15 [info]: Retrieved images for category 705tANPCUM  
+05-04-2024 01:21:15 [info]: 2024-04-04T23:21:15.791Z [GET]: /api/category-images/705tANPCUM Status: 304 12.678ms  
+05-04-2024 01:21:17 [error]: Error uploading image for category 705tANPCUM: CategoryImage validation failed: imageData: Path `imageData` is required.  
+05-04-2024 01:21:17 [info]: 2024-04-04T23:21:17.327Z [POST]: /api/category-images Status: 500 14.948ms  
+05-04-2024 01:21:39 [info]: Connected to MongoDB  
+05-04-2024 01:23:07 [info]: Connected to MongoDB  
+05-04-2024 01:23:18 [info]: Connected to MongoDB  
+05-04-2024 01:23:29 [info]: Retrieved images for category 705tANPCUM  
+05-04-2024 01:23:29 [info]: 2024-04-04T23:23:29.941Z [GET]: /api/category-images/705tANPCUM Status: 304 19.156ms  
+05-04-2024 01:23:31 [error]: Error uploading image for category 705tANPCUM: CategoryImage validation failed: imageData: Path `imageData` is required.  
+05-04-2024 01:23:31 [info]: 2024-04-04T23:23:31.288Z [POST]: /api/category-images Status: 500 17.207ms  
+05-04-2024 01:24:22 [info]: Connected to MongoDB  
+05-04-2024 01:24:25 [error]: Error uploading image for category 705tANPCUM: CategoryImage validation failed: imageData: Path `imageData` is required.  
+05-04-2024 01:24:25 [info]: 2024-04-04T23:24:25.466Z [POST]: /api/category-images Status: 500 27.664ms  
+05-04-2024 01:24:46 [info]: Connected to MongoDB  
+05-04-2024 01:24:48 [info]: Connected to MongoDB  
+05-04-2024 01:24:49 [error]: Error uploading image for category 705tANPCUM: CategoryImage validation failed: imageData: Path `imageData` is required.  
+05-04-2024 01:24:49 [info]: 2024-04-04T23:24:49.205Z [POST]: /api/category-images Status: 500 29.949ms  
+05-04-2024 01:25:38 [info]: Connected to MongoDB  
+05-04-2024 01:25:45 [info]: Retrieved images for category 705tANPCUM  
+05-04-2024 01:25:45 [info]: 2024-04-04T23:25:45.945Z [GET]: /api/category-images/705tANPCUM Status: 304 17.231ms  
+05-04-2024 01:25:46 [error]: Error uploading image for category 705tANPCUM: CategoryImage validation failed: imageData: Path `imageData` is required.  
+05-04-2024 01:25:47 [info]: 2024-04-04T23:25:47.000Z [POST]: /api/category-images Status: 500 22.248ms  
+05-04-2024 01:26:11 [info]: Connected to MongoDB  
+05-04-2024 01:26:15 [info]: Connected to MongoDB  
+05-04-2024 01:26:21 [info]: Connected to MongoDB  
+05-04-2024 01:26:24 [error]: Error uploading image for category 705tANPCUM: CategoryImage validation failed: imageData: Path `imageData` is required.  
+05-04-2024 01:26:24 [info]: 2024-04-04T23:26:24.711Z [POST]: /api/category-images Status: 500 16.195ms  
+05-04-2024 01:26:33 [info]: Connected to MongoDB  
+05-04-2024 01:26:56 [info]: Connected to MongoDB  
+05-04-2024 01:26:58 [info]: Connected to MongoDB  
+05-04-2024 01:26:58 [error]: Error uploading image for category 705tANPCUM: CategoryImage validation failed: imageData: Path `imageData` is required.  
+05-04-2024 01:26:58 [info]: 2024-04-04T23:26:58.668Z [POST]: /api/category-images Status: 500 40.226ms  
+05-04-2024 01:27:30 [info]: Connected to MongoDB  
+05-04-2024 01:27:32 [error]: Error uploading image for category 705tANPCUM: CategoryImage validation failed: imageData: Path `imageData` is required.  
+05-04-2024 01:27:32 [info]: 2024-04-04T23:27:32.764Z [POST]: /api/category-images Status: 500 17.936ms  
+05-04-2024 01:28:07 [info]: Connected to MongoDB  
+05-04-2024 01:29:53 [info]: Connected to MongoDB  
+05-04-2024 01:29:56 [info]: Connected to MongoDB  
+05-04-2024 01:30:04 [info]: Connected to MongoDB  
+05-04-2024 01:30:10 [info]: Retrieved images for category 705tANPCUM  
+05-04-2024 01:30:10 [info]: 2024-04-04T23:30:10.671Z [GET]: /api/category-images/705tANPCUM Status: 304 14.844ms  
+05-04-2024 01:30:13 [info]: Retrieved images for category 705tANPCUM  
+05-04-2024 01:30:13 [info]: 2024-04-04T23:30:13.607Z [GET]: /api/category-images/705tANPCUM Status: 304 4.437ms  
+05-04-2024 01:30:17 [info]: 2024-04-04T23:30:17.227Z [GET]: /api/category-images Status: 404 2.853ms  
+05-04-2024 01:30:18 [info]: Retrieved images for category 705tANPCUM  
+05-04-2024 01:30:18 [info]: 2024-04-04T23:30:18.660Z [GET]: /api/category-images/705tANPCUM Status: 304 9.356ms  
+05-04-2024 01:30:24 [info]: Image uploaded for category 705tANPCUM: chef.webp  
+05-04-2024 01:30:24 [info]: 2024-04-04T23:30:24.403Z [POST]: /api/category-images Status: 201 36.440ms  
+05-04-2024 01:30:24 [info]: 2024-04-04T23:30:24.477Z [GET]: /api/category-images Status: 404 2.052ms  
+05-04-2024 01:30:25 [info]: Retrieved images for category 705tANPCUM  
+05-04-2024 01:30:25 [info]: 2024-04-04T23:30:25.626Z [GET]: /api/category-images/705tANPCUM Status: 200 18.703ms  
+05-04-2024 01:30:28 [info]: Retrieved images for category 705tANPCUM  
+05-04-2024 01:30:28 [info]: 2024-04-04T23:30:28.741Z [GET]: /api/category-images/705tANPCUM Status: 304 24.548ms  
+05-04-2024 01:30:34 [info]: 2024-04-04T23:30:34.239Z [GET]: /api/category-images Status: 404 1.791ms  
+05-04-2024 01:32:54 [info]: Connected to MongoDB  
+05-04-2024 01:33:11 [info]: Connected to MongoDB  
+05-04-2024 01:33:33 [info]: Connected to MongoDB  
+05-04-2024 01:33:44 [info]: Connected to MongoDB  
+05-04-2024 01:33:48 [info]: Retrieved images for category KL5FHSCIdx  
+05-04-2024 01:33:48 [info]: 2024-04-04T23:33:48.435Z [GET]: /api/category-images/KL5FHSCIdx Status: 304 30.284ms  
+05-04-2024 01:33:55 [info]: Image uploaded for category KL5FHSCIdx: 80f38db378d291218ce3045d21d8091a.webp  
+05-04-2024 01:33:55 [info]: 2024-04-04T23:33:55.744Z [POST]: /api/category-images Status: 201 19.105ms  
+05-04-2024 01:33:55 [info]: 2024-04-04T23:33:55.803Z [GET]: /api/category-images Status: 404 3.246ms  
+05-04-2024 01:33:56 [info]: Retrieved images for category KL5FHSCIdx  
+05-04-2024 01:33:56 [info]: 2024-04-04T23:33:56.908Z [GET]: /api/category-images/KL5FHSCIdx Status: 200 6.505ms  
+05-04-2024 01:33:59 [info]: Retrieved images for category KL5FHSCIdx  
+05-04-2024 01:33:59 [info]: 2024-04-04T23:33:59.897Z [GET]: /api/category-images/KL5FHSCIdx Status: 304 12.344ms  
+05-04-2024 01:34:01 [info]: 2024-04-04T23:34:01.025Z [GET]: /api/category-images Status: 404 1.378ms  
+05-04-2024 01:35:41 [info]: Connected to MongoDB  
+05-04-2024 01:35:43 [info]: Connected to MongoDB  
+05-04-2024 01:35:50 [info]: Connected to MongoDB  
+05-04-2024 01:35:55 [info]: Connected to MongoDB  
+05-04-2024 01:36:15 [info]: Connected to MongoDB  
+05-04-2024 01:40:49 [info]: Connected to MongoDB  
+05-04-2024 01:41:10 [info]: Connected to MongoDB  
+05-04-2024 01:41:15 [info]: Retrieved images for category 705tANPCUM  
+05-04-2024 01:41:15 [info]: 2024-04-04T23:41:15.929Z [GET]: /api/category-images/705tANPCUM Status: 304 68.211ms  
+05-04-2024 01:41:23 [info]: Updated image for category 705tANPCUM: Captura desde 2024-04-04 15-31-33.webp  
+05-04-2024 01:41:23 [info]: 2024-04-04T23:41:23.331Z [PUT]: /api/category-images/705tANPCUM Status: 200 23.549ms  
+05-04-2024 01:41:23 [info]: 2024-04-04T23:41:23.381Z [GET]: /api/category-images Status: 404 3.694ms  
+05-04-2024 01:41:24 [info]: Retrieved images for category 705tANPCUM  
+05-04-2024 01:41:24 [info]: 2024-04-04T23:41:24.214Z [GET]: /api/category-images/705tANPCUM Status: 200 8.535ms  
+05-04-2024 01:41:27 [info]: Retrieved images for category 705tANPCUM  
+05-04-2024 01:41:27 [info]: 2024-04-04T23:41:27.515Z [GET]: /api/category-images/705tANPCUM Status: 304 18.053ms  
+05-04-2024 01:41:28 [info]: 2024-04-04T23:41:28.294Z [GET]: /api/category-images Status: 404 1.514ms  
+05-04-2024 01:41:32 [info]: Connected to MongoDB  
