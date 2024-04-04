@@ -15,6 +15,7 @@ steps:
       - '--region=$_REGION'
       - '--entry-point=service'
       - '--allow-unauthenticated'
+      - '--memory=1024MB'
       - '--project=$_GCLOUD_PROJECT'
       - '--vpc-connector=$_VPC_CONNECTOR'
       - '--set-secrets=NODE_ENV=GUSTUS_NODE_ENV:latest'

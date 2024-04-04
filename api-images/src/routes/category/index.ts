@@ -1,18 +1,26 @@
-import { Router } from 'express';
-import multer from 'multer';
+import express from 'express';
+import fileUpload from 'express-fileupload';
 import { CategoryImageController } from '../../controllers';
+import { Request, Response } from 'express';
 
-const router = Router();
-const upload = multer({ storage: multer.memoryStorage() });
+const router = express.Router();
 
-router.post('/', upload.single('image'), CategoryImageController.uploadImage);
+router.use(
+  fileUpload({
+    createParentPath: true,
+    useTempFiles: true,
+    tempFileDir: '/tmp/',
+  })
+);
+
+router.post('/', (req: Request, res: Response) =>
+  CategoryImageController.uploadImage(req, res)
+);
 
 router.get('/:category_id', CategoryImageController.getImagesByCategoryId);
 
-router.put(
-  '/:category_id',
-  upload.single('image'),
-  CategoryImageController.updateImage
+router.put('/:category_id', (req: Request, res: Response) =>
+  CategoryImageController.updateImage(req, res)
 );
 
 router.delete('/:category_id', CategoryImageController.deleteImage);

@@ -1,28 +1,53 @@
-import { Response } from 'express';
-import { ICategoryImage, MulterRequest } from '../../utils/interfaces';
+import { Request, Response } from 'express';
+import { ICategoryImage } from '../../utils/interfaces';
 import { CategoryImage } from '../../models';
 import { MongoService } from '../../services';
 import { loggingMiddleware } from '../../middlewares';
+import fs from 'fs/promises'; // Using the Promise-based version of 'fs'
 
 class CategoryImageController {
   static service = new MongoService<ICategoryImage>(CategoryImage);
 
-  static async uploadImage(req: MulterRequest, res: Response) {
+  static async uploadImage(req: Request, res: Response) {
     const { category_id, imageName } = req.body;
     try {
-      if (!req.file) {
+      if (
+        !req.files ||
+        Object.keys(req.files).length === 0 ||
+        !req.files.image
+      ) {
         loggingMiddleware.logger.warn(
           `Upload attempt without file by ${req.ip} for category ${category_id}`
         );
         return res.status(400).send('No image file provided.');
       }
+
+      let imageFile = req.files.image;
+
+      if (Array.isArray(imageFile)) {
+        imageFile = imageFile[0];
+      }
+
+      let fileData: Buffer;
+      if (imageFile.tempFilePath) {
+        fileData = await fs.readFile(imageFile.tempFilePath);
+      } else if (imageFile.data) {
+        fileData = imageFile.data;
+      } else {
+        loggingMiddleware.logger.error(
+          `No file data found for category ${category_id}`
+        );
+        return res.status(400).send('File data could not be found.');
+      }
+
       const newImage = await CategoryImageController.service.create({
         category_id,
-        imageData: req.file.buffer,
-        imageName,
+        imageData: fileData,
+        imageName: imageName || imageFile.name,
       });
+
       loggingMiddleware.logger.info(
-        `Image uploaded for category ${category_id}: ${imageName}`
+        `Image uploaded for category ${category_id}: ${imageName || imageFile.name}`
       );
       res.status(201).json(newImage);
     } catch (error) {
@@ -33,7 +58,7 @@ class CategoryImageController {
     }
   }
 
-  static async getImagesByCategoryId(req: MulterRequest, res: Response) {
+  static async getImagesByCategoryId(req: Request, res: Response) {
     const { category_id } = req.params;
     try {
       const images = await CategoryImageController.service.find({
@@ -51,32 +76,58 @@ class CategoryImageController {
     }
   }
 
-  static async updateImage(req: MulterRequest, res: Response) {
+  static async updateImage(req: Request, res: Response) {
     const { category_id } = req.params;
     const { imageName } = req.body;
     try {
-      if (!req.file) {
+      if (
+        !req.files ||
+        Object.keys(req.files).length === 0 ||
+        !req.files.image
+      ) {
         loggingMiddleware.logger.warn(
           `Update attempt without file by ${req.ip} for category ${category_id}`
         );
         return res.status(400).send('No new image file provided for update.');
       }
+
+      let imageFile = req.files.image;
+      if (Array.isArray(imageFile)) {
+        imageFile = imageFile[0];
+      }
+
+      let fileData: Buffer;
+
+      if (imageFile.tempFilePath) {
+        fileData = await fs.readFile(imageFile.tempFilePath);
+      } else if (imageFile.data) {
+        fileData = imageFile.data;
+      } else {
+        loggingMiddleware.logger.error(
+          `No file data found for category ${category_id}`
+        );
+        return res.status(400).send('File data could not be found.');
+      }
+
       const updateData = {
-        imageData: req.file.buffer,
-        imageName,
+        imageData: fileData,
+        imageName: imageName || imageFile.name,
       };
+
       const updatedImage = await CategoryImageController.service.update(
         { category_id },
         updateData
       );
+
       if (!updatedImage) {
         loggingMiddleware.logger.info(
           `Image not found for category ${category_id} during update.`
         );
         return res.status(404).send('Image not found.');
       }
+
       loggingMiddleware.logger.info(
-        `Updated image for category ${category_id}: ${imageName}`
+        `Updated image for category ${category_id}: ${imageName || imageFile.name}`
       );
       res.json(updatedImage);
     } catch (error) {
@@ -87,7 +138,7 @@ class CategoryImageController {
     }
   }
 
-  static async deleteImage(req: MulterRequest, res: Response) {
+  static async deleteImage(req: Request, res: Response) {
     const { category_id } = req.params;
     try {
       const result = await CategoryImageController.service.delete({

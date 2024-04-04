@@ -1,20 +1,22 @@
-import { Router } from 'express';
-import multer from 'multer';
+import express from 'express';
+import fileUpload from 'express-fileupload';
 import { RecipeImageController } from '../../controllers';
 
-const router = Router();
-const upload = multer({ storage: multer.memoryStorage() });
+const router = express.Router();
 
-router.post('/', upload.single('image'), RecipeImageController.uploadImage);
-
-router.get('/:recipe_id', RecipeImageController.getImagesByRecipeId);
-
-router.put(
-  '/:recipe_id',
-  upload.single('image'),
-  RecipeImageController.updateImage
+router.use(
+  fileUpload({
+    createParentPath: true,
+    useTempFiles: true,
+    tempFileDir: '/tmp/',
+  })
 );
 
+router.post('/', (req, res) => RecipeImageController.uploadImage(req, res));
+router.get('/:recipe_id', RecipeImageController.getImagesByRecipeId);
+router.put('/:recipe_id', (req, res) =>
+  RecipeImageController.updateImage(req, res)
+);
 router.delete('/:recipe_id', RecipeImageController.deleteImage);
 
 export default router;
