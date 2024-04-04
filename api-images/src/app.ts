@@ -11,7 +11,7 @@ const app: Express = express();
 
 connectDatabase().then(() => {
   app.set('trust proxy', 1);
-  app.use(cors());
+  app.use(cors({ origin: '*' }));
   app.use(helmet());
   app.use(express.json());
   app.use(loggingMiddleware.morganMiddleware);
