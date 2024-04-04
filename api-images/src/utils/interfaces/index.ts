@@ -1,4 +1,6 @@
 import winston from 'winston';
+import { Document } from 'mongoose';
+import { Request } from 'express';
 
 export interface Environment {
   PORT: number;
@@ -14,4 +16,18 @@ export interface ExtendedLogInfo extends winston.Logform.TransformableInfo {
 
 export interface CustomError extends Error {
   statusCode?: number;
+}
+
+export interface ICategoryImage extends Document {
+  category_id: string;
+  imageData: Buffer;
+}
+
+export interface IRecipeImage extends Document {
+  recipe_id: string;
+  imageData: Buffer;
+}
+
+export interface MulterRequest extends Request {
+  file: Express.Multer.File;
 }
