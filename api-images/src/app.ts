@@ -3,22 +3,20 @@ import helmet from 'helmet';
 import { connectDatabase } from './services';
 import limiter from './middlewares/limiter';
 import configureRoutes from './routes';
-import {
-  authMiddleware,
-  corsMiddleware,
-  loggingMiddleware,
-} from './middlewares';
+import { loggingMiddleware } from './middlewares';
+import serverImagesRoutes from './routes/server';
+import cors from 'cors';
 
 const app: Express = express();
 
 connectDatabase().then(() => {
   app.set('trust proxy', 1);
-  app.use(corsMiddleware);
   app.use(helmet());
   app.use(express.json());
   app.use(loggingMiddleware.morganMiddleware);
   app.use(limiter);
-  app.use(authMiddleware);
+  app.use('/api/server', serverImagesRoutes);
+  app.use(cors());
 
   configureRoutes(app);
 });

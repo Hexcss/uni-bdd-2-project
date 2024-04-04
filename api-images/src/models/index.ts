@@ -12,6 +12,8 @@ const categoryImageSchema = new mongoose.Schema({
   imageName: { type: String, required: true },
 });
 
+categoryImageSchema.index({ category_id: 1 });
+
 const recipeImageSchema = new mongoose.Schema({
   recipe_id: {
     type: String,
@@ -22,6 +24,8 @@ const recipeImageSchema = new mongoose.Schema({
   imageData: { type: Buffer, required: true },
   imageName: { type: String, required: true },
 });
+
+recipeImageSchema.index({ recipe_id: 1 });
 
 const CategoryImage = mongoose.model<ICategoryImage>(
   'CategoryImage',
