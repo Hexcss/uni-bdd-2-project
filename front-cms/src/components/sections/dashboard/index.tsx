@@ -16,7 +16,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getData } from "../../../api/data";
 import { isDrawerClose } from "../../../utils/signals";
-import CreationModal from "../../forms/creation";
+import { FormModal } from "../../";
 
 const DashboardSection: React.FC<DashboardSectionProps> = ({ title }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -106,7 +106,7 @@ const DashboardSection: React.FC<DashboardSectionProps> = ({ title }) => {
           </Typography>
         </Button>
       </Box>
-      <CreationModal
+      <FormModal
         open={modalOpen}
         onClose={handleModalClose}
         subRoute={currentSubRoute}

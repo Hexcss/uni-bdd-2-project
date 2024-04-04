@@ -12,7 +12,7 @@ interface TagFormProps {
   id?: string;
 }
 
-export const TagForm: React.FC<TagFormProps> = ({ onClose, data = EmptyTag, id }) => {
+const TagForm: React.FC<TagFormProps> = ({ onClose, data = EmptyTag, id }) => {
   const queryClient = useQueryClient();
   const [tag, setTag] = useState<ITag>(data);
 
@@ -57,3 +57,5 @@ export const TagForm: React.FC<TagFormProps> = ({ onClose, data = EmptyTag, id }
     </form>
   );
 };
+
+export default TagForm;

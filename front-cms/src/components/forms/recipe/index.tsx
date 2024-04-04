@@ -27,7 +27,7 @@ interface RecipeFormProps {
   id?: string;
 }
 
-export const RecipeForm: React.FC<RecipeFormProps> = ({
+const RecipeForm: React.FC<RecipeFormProps> = ({
   onClose,
   data = EmptyRecipe,
   id
@@ -251,3 +251,5 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({
     </form>
   );
 };
+
+export default RecipeForm;

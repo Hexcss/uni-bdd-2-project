@@ -8,9 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { RecipeForm } from "../recipe";
-import { CategoryForm } from "../category";
-import { TagForm } from "../tag";
+import { RecipeForm, CategoryForm, TagForm } from "../../"
 import { useLocation } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteData, getSingleData } from "../../../api/data";

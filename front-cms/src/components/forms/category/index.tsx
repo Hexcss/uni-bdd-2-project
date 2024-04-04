@@ -12,7 +12,7 @@ interface CategoryFormProps {
   id?: string;
 }
 
-export const CategoryForm: React.FC<CategoryFormProps> = ({
+const CategoryForm: React.FC<CategoryFormProps> = ({
   onClose,
   data = EmptyCategory,
   id
@@ -81,3 +81,5 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
     </form>
   );
 };
+
+export default CategoryForm;

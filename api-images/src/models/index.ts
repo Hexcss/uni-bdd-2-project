@@ -6,6 +6,7 @@ const categoryImageSchema = new mongoose.Schema({
     type: String,
     ref: 'Category',
     required: true,
+    unique: true,
   },
   imageData: { type: Buffer, required: true },
 });
@@ -15,6 +16,7 @@ const recipeImageSchema = new mongoose.Schema({
     type: String,
     ref: 'Recipe',
     required: true,
+    unique: true,
   },
   imageData: { type: Buffer, required: true },
 });

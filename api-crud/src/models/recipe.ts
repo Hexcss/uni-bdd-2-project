@@ -30,10 +30,12 @@ const recipeSchema = new Schema({
   category_id: {
     type: String,
     required: true,
+    ref: 'Category',
   },
   tag_ids: [
     {
       type: String,
+      ref: 'Tag',
     },
   ],
   createdAt: {
