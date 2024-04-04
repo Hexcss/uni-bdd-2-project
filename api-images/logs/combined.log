@@ -324,3 +324,16 @@
 04-04-2024 23:57:29 [info]: Connected to MongoDB  
 04-04-2024 23:58:33 [info]: Connected to MongoDB  
 04-04-2024 23:58:37 [info]: Connected to MongoDB  
+05-04-2024 00:16:49 [info]: Retrieved images for recipe recipe0001  
+05-04-2024 00:16:49 [info]: 2024-04-04T22:16:49.707Z [GET]: /api/recipe-images/recipe0001 Status: 304 24.657ms  
+05-04-2024 00:16:50 [info]: 2024-04-04T22:16:50.345Z [GET]: /api/recipe-images Status: 404 3.372ms  
+05-04-2024 00:16:51 [info]: Retrieved images for recipe uSkBMJOSiO  
+05-04-2024 00:16:51 [info]: 2024-04-04T22:16:51.015Z [GET]: /api/recipe-images/uSkBMJOSiO Status: 304 6.367ms  
+05-04-2024 00:16:57 [info]: Image uploaded for recipe uSkBMJOSiO: output-onlinepngtools.webp  
+05-04-2024 00:16:57 [info]: 2024-04-04T22:16:57.192Z [POST]: /api/recipe-images Status: 201 16.328ms  
+05-04-2024 00:16:57 [info]: 2024-04-04T22:16:57.521Z [GET]: /api/recipe-images Status: 404 3.969ms  
+05-04-2024 00:19:35 [info]: 2024-04-04T22:19:35.965Z [GET]: /api/server/recipe-images/recipe0001 Status: 200 5.436ms  
+05-04-2024 00:19:35 [info]: 2024-04-04T22:19:35.967Z [GET]: /api/server/recipe-images/uSkBMJOSiO Status: 200 4.645ms  
+05-04-2024 00:19:38 [info]: 2024-04-04T22:19:38.492Z [GET]: /api/server/recipe-images/recipe0001 Status: 200 3.360ms  
+05-04-2024 00:19:38 [info]: 2024-04-04T22:19:38.494Z [GET]: /api/server/recipe-images/uSkBMJOSiO Status: 200 3.078ms  
+05-04-2024 00:23:29 [info]: Connected to MongoDB  
