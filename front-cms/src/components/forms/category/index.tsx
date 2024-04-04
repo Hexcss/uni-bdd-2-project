@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, TextField, DialogActions, Grid } from "@mui/material";
-import { ICategory } from "../../../utils/interfaces";
+import { ICategory, ICategoryImageData } from "../../../utils/interfaces";
 import { EmptyCategory } from "../../../utils/constants";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { postData, updateData } from "../../../api/data";
@@ -68,11 +68,8 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
         : await postData(category, "categories");
 
       if (file) {
-        const formData = new FormData();
-        formData.append("image", file);
-        formData.append("category_id", category.id);
-        formData.append("imageName", file.name);
-        await uploadImage(formData, "category", httpMethod, category.id);
+        const categoryImageData: ICategoryImageData = { image: file, category_id: category.id, imageName: file.name };
+        await uploadImage(categoryImageData, "category", httpMethod, category.id);
       }
 
       return response;

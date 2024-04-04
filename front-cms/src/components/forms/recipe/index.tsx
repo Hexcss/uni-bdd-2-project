@@ -15,7 +15,7 @@ import {
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { EmptyRecipe } from "../../../utils/constants";
-import { IRecipe } from "../../../utils/interfaces";
+import { IRecipe, IRecipeImageData } from "../../../utils/interfaces";
 import { generateId } from "../../../utils/functions";
 import { getData, postData, updateData } from "../../../api/data";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -139,7 +139,8 @@ const RecipeForm: React.FC<RecipeFormProps> = ({
         formData.append("image", file);
         formData.append("recipe_id", recipe.id);
         formData.append("imageName", file.name);
-        await uploadImage(formData, "recipe", httpMethod, recipe.id);
+        const recipeImageData: IRecipeImageData = { image: file, recipe_id: recipe.id, imageName: file.name}
+        await uploadImage(recipeImageData, "recipe", httpMethod, recipe.id);
       }
 
       return response;

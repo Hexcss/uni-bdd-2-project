@@ -52,3 +52,15 @@ export interface ITag {
 }
 
 export type ImageType = "category" | "recipe";
+
+export interface ICategoryImageData {
+  image: File;
+  category_id: string;
+  imageName: string;
+}
+
+export interface IRecipeImageData {
+  image: File;
+  recipe_id: string;
+  imageName: string;
+}
