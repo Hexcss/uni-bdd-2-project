@@ -33,6 +33,7 @@ const DashboardSection: React.FC<DashboardSectionProps> = ({ title }) => {
 
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => {
+    navigate(`/dashboard/${currentSubRoute}`);
     setModalOpen(false);
   };
 
