@@ -1,6 +1,5 @@
 import winston from 'winston';
 import { Document } from 'mongoose';
-import { Request } from 'express';
 
 export interface Environment {
   PORT: number;
@@ -28,8 +27,4 @@ export interface IRecipeImage extends Document {
   recipe_id: string;
   imageData: Buffer;
   imageName: string;
-}
-
-export interface MulterRequest extends Request {
-  file: Express.Multer.File;
 }

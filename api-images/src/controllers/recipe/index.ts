@@ -1,30 +1,53 @@
-import { Response } from 'express';
-import { IRecipeImage, MulterRequest } from '../../utils/interfaces';
+import { Request, Response } from 'express';
+import { IRecipeImage } from '../../utils/interfaces';
 import { RecipeImage } from '../../models';
 import { MongoService } from '../../services';
 import { loggingMiddleware } from '../../middlewares';
+import fs from 'fs/promises';
 
 class RecipeImageController {
   static service = new MongoService<IRecipeImage>(RecipeImage);
 
-  static async uploadImage(req: MulterRequest, res: Response) {
-    const { recipe_id, imageName } = req.body;
+  static async uploadImage(req: Request, res: Response) {
+    const { recipe_id } = req.body;
     try {
-      if (!req.file) {
+      if (
+        !req.files ||
+        Object.keys(req.files).length === 0 ||
+        !req.files.image
+      ) {
         loggingMiddleware.logger.warn(
-          `Upload attempt without file by ${req.ip}`
+          `Upload attempt without file by ${req.ip} for recipe ${recipe_id}`
         );
         return res.status(400).send('No image file provided.');
       }
 
+      let imageFile = req.files.image;
+
+      if (Array.isArray(imageFile)) {
+        imageFile = imageFile[0];
+      }
+      let fileData: Buffer;
+
+      if (imageFile.tempFilePath) {
+        fileData = await fs.readFile(imageFile.tempFilePath);
+      } else if (imageFile.data) {
+        fileData = imageFile.data;
+      } else {
+        loggingMiddleware.logger.error(
+          `No file data found for recipe ${recipe_id}`
+        );
+        return res.status(400).send('File data could not be found.');
+      }
+
       const newImage = await RecipeImageController.service.create({
         recipe_id,
-        imageData: req.file.buffer,
-        imageName,
+        imageData: fileData,
+        imageName: imageFile.name,
       });
 
       loggingMiddleware.logger.info(
-        `Image uploaded for recipe ${recipe_id}: ${imageName}`
+        `Image uploaded for recipe ${recipe_id}: ${imageFile.name}`
       );
       res.status(201).json(newImage);
     } catch (error) {
@@ -35,7 +58,7 @@ class RecipeImageController {
     }
   }
 
-  static async getImagesByRecipeId(req: MulterRequest, res: Response) {
+  static async getImagesByRecipeId(req: Request, res: Response) {
     const { recipe_id } = req.params;
     try {
       const images = await RecipeImageController.service.find({ recipe_id });
@@ -49,13 +72,43 @@ class RecipeImageController {
     }
   }
 
-  static async updateImage(req: MulterRequest, res: Response) {
+  static async updateImage(req: Request, res: Response) {
     const { recipe_id } = req.params;
     const { imageName } = req.body;
     try {
+      if (
+        !req.files ||
+        Object.keys(req.files).length === 0 ||
+        !req.files.image
+      ) {
+        loggingMiddleware.logger.warn(
+          `Update attempt without file by ${req.ip} for recipe ${recipe_id}`
+        );
+        return res.status(400).send('No image file provided for update.');
+      }
+
+      let imageFile = req.files.image;
+
+      if (Array.isArray(imageFile)) {
+        imageFile = imageFile[0];
+      }
+
+      let fileData: Buffer;
+
+      if (imageFile.tempFilePath) {
+        fileData = await fs.readFile(imageFile.tempFilePath);
+      } else if (imageFile.data) {
+        fileData = imageFile.data;
+      } else {
+        loggingMiddleware.logger.error(
+          `No file data found for recipe ${recipe_id}`
+        );
+        return res.status(400).send('File data could not be found.');
+      }
+
       const updateData = {
-        imageData: req.file?.buffer,
-        imageName,
+        imageData: fileData,
+        imageName: imageName || imageFile.name,
       };
 
       const updatedImage = await RecipeImageController.service.update(
@@ -71,7 +124,7 @@ class RecipeImageController {
       }
 
       loggingMiddleware.logger.info(
-        `Updated image for recipe ${recipe_id}: ${imageName}`
+        `Updated image for recipe ${recipe_id}: ${imageName || imageFile.name}`
       );
       res.json(updatedImage);
     } catch (error) {
@@ -82,7 +135,7 @@ class RecipeImageController {
     }
   }
 
-  static async deleteImage(req: MulterRequest, res: Response) {
+  static async deleteImage(req: Request, res: Response) {
     const { recipe_id } = req.params;
     try {
       const result = await RecipeImageController.service.delete({ recipe_id });
