@@ -1,12 +1,12 @@
 import axios from "axios";
 import { environment } from "../../config";
 import { decryptToken } from "../../utils/functions";
-import { ImageType } from "../../utils/interfaces";
+import { ICategoryImageData, ImageType, IRecipeImageData } from "../../utils/interfaces";
 
 const BASE_URL = environment.IMAGE_API_URL;
 
 async function uploadImage(
-  formData: FormData,
+  formData: ICategoryImageData | IRecipeImageData,
   type: ImageType,
   method: "post" | "put",
   refId?: string

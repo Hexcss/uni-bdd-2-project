@@ -441,3 +441,14 @@
 05-04-2024 01:41:27 [info]: 2024-04-04T23:41:27.515Z [GET]: /api/category-images/705tANPCUM Status: 304 18.053ms  
 05-04-2024 01:41:28 [info]: 2024-04-04T23:41:28.294Z [GET]: /api/category-images Status: 404 1.514ms  
 05-04-2024 01:41:32 [info]: Connected to MongoDB  
+05-04-2024 01:54:47 [info]: Retrieved images for category 0Cg5gNCY8U  
+05-04-2024 01:54:47 [info]: 2024-04-04T23:54:47.463Z [GET]: /api/category-images/0Cg5gNCY8U Status: 200 42.042ms  
+05-04-2024 01:54:48 [info]: 2024-04-04T23:54:48.100Z [GET]: /api/category-images Status: 404 2.910ms  
+05-04-2024 01:54:49 [info]: Retrieved images for category 796LRE75iW  
+05-04-2024 01:54:49 [info]: 2024-04-04T23:54:49.407Z [GET]: /api/category-images/796LRE75iW Status: 200 7.264ms  
+05-04-2024 01:54:53 [info]: Image uploaded for category 796LRE75iW: chef-logo.webp  
+05-04-2024 01:54:53 [info]: 2024-04-04T23:54:53.694Z [POST]: /api/category-images Status: 201 22.644ms  
+05-04-2024 01:54:53 [info]: 2024-04-04T23:54:53.746Z [GET]: /api/category-images Status: 404 2.060ms  
+05-04-2024 01:54:55 [info]: Retrieved images for category 796LRE75iW  
+05-04-2024 01:54:55 [info]: 2024-04-04T23:54:55.249Z [GET]: /api/category-images/796LRE75iW Status: 200 10.181ms  
+05-04-2024 01:54:56 [info]: 2024-04-04T23:54:56.666Z [GET]: /api/category-images Status: 404 1.450ms  
