@@ -302,3 +302,23 @@
 04-04-2024 22:08:53 [info]: 2024-04-04T20:08:53.629Z [GET]: /api/server/recipe-images/recipe0001 Status: 200 5.320ms  
 04-04-2024 22:08:53 [info]: 2024-04-04T20:08:53.631Z [GET]: /api/server/recipe-images/uSkBMJOSiO Status: 404 3.228ms  
 04-04-2024 22:10:43 [info]: Connected to MongoDB  
+04-04-2024 23:47:45 [info]: 2024-04-04T21:47:45.363Z [GET]: /api/category-images Status: 404 12.559ms  
+04-04-2024 23:47:46 [info]: 2024-04-04T21:47:46.403Z [GET]: /api/category-images Status: 404 6.043ms  
+04-04-2024 23:47:48 [info]: 2024-04-04T21:47:48.422Z [GET]: /api/category-images Status: 404 1.276ms  
+04-04-2024 23:47:52 [info]: 2024-04-04T21:47:52.438Z [GET]: /api/category-images Status: 404 2.245ms  
+04-04-2024 23:47:55 [info]: 2024-04-04T21:47:55.870Z [POST]: /api/category-images Status: 201 30.229ms  
+04-04-2024 23:49:24 [info]: 2024-04-04T21:49:24.749Z [GET]: /api/category-images/TR91rS53vP Status: 200 15.189ms  
+04-04-2024 23:49:26 [info]: 2024-04-04T21:49:26.613Z [GET]: /api/category-images Status: 404 1.382ms  
+04-04-2024 23:49:27 [info]: 2024-04-04T21:49:27.294Z [GET]: /api/category-images/uf6Ot6r4TW Status: 304 7.375ms  
+04-04-2024 23:49:31 [info]: 2024-04-04T21:49:31.282Z [POST]: /api/category-images Status: 201 13.797ms  
+04-04-2024 23:49:31 [info]: 2024-04-04T21:49:31.346Z [GET]: /api/category-images Status: 404 1.712ms  
+04-04-2024 23:49:32 [info]: 2024-04-04T21:49:32.139Z [GET]: /api/category-images/uf6Ot6r4TW Status: 200 6.845ms  
+04-04-2024 23:49:33 [info]: 2024-04-04T21:49:33.573Z [GET]: /api/category-images Status: 404 1.761ms  
+04-04-2024 23:49:57 [info]: 2024-04-04T21:49:57.683Z [GET]: /api/category-images/0Cg5gNCY8U Status: 200 4.389ms  
+04-04-2024 23:50:03 [info]: 2024-04-04T21:50:03.363Z [POST]: /api/category-images Status: 201 4.125ms  
+04-04-2024 23:50:03 [info]: 2024-04-04T21:50:03.485Z [GET]: /api/category-images Status: 404 4.052ms  
+04-04-2024 23:53:53 [info]: Connected to MongoDB  
+04-04-2024 23:55:51 [info]: Connected to MongoDB  
+04-04-2024 23:55:53 [info]: Connected to MongoDB  
+04-04-2024 23:57:27 [info]: Connected to MongoDB  
+04-04-2024 23:57:29 [info]: Connected to MongoDB  
