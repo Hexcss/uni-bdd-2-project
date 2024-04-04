@@ -1,0 +1,132 @@
+section {
+    width: 100%;
+    height: 100vh;
+  
+    nav {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      position: fixed;
+      right: 0;
+      left: 0;
+      background: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+  
+      .logo img {
+        width: 100px;
+        cursor: pointer;
+        margin: 7px 0;
+      }
+  
+      ul {
+        list-style: none;
+  
+        li {
+          display: inline-block;
+          margin: 0 15px;
+  
+          a {
+            text-decoration: none;
+            color: #000;
+            font-weight: 500;
+            font-size: 17px;
+            transition: 0.1s;
+  
+            &::after {
+              content: '';
+              width: 0;
+              height: 2px;
+              background: #fac031;
+              display: block;
+              transition: 0.2s linear;
+            }
+  
+            &:hover {
+              color: #fac031;
+  
+              &::after {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+  
+      .icon i {
+        font-size: 18px;
+        color: #000;
+        margin: 0 5px;
+        cursor: pointer;
+        transition: 0.3s;
+  
+        &:hover {
+          color: #fac031;
+        }
+      }
+    }
+  
+    .main {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      position: relative;
+      top: 130px;
+  
+      .men_text h1 {
+        font-size: 60px;
+        position: relative;
+        top: -90px;
+        left: 20px;
+  
+        span {
+          margin-left: 15px;
+          color: #fac031;
+          font-family: mv boli;
+          line-height: 22px;
+          font-size: 70px;
+        }
+      }
+  
+      .main_image img {
+        width: 700px;
+        position: relative;
+        left: 70px;
+      }
+    }
+  
+    p {
+      width: 650px;
+      text-align: justify;
+      position: relative;
+      left: 123px;
+      bottom: 120px;
+      line-height: 22px;
+    }
+  
+    .main_btn {
+      background: #fac031;
+      position: relative;
+      left: 123px;
+      bottom: 30px;
+      width: 150px;
+      cursor: pointer;
+      padding: 12px 25px;
+  
+      a {
+        color: #fff;
+        margin-right: 5px;
+        text-decoration: none;
+      }
+  
+      i {
+        color: #fff;
+        transition: 0.3s;
+  
+        &:hover {
+          transform: translateX(7px);
+        }
+      }
+    }
+  }
+  

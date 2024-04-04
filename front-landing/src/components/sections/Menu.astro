@@ -1,0 +1,38 @@
+---
+import type { IRecipe } from "../../utils/interfaces";
+import MenuCard from "../cards/MenuCard.astro";
+
+const bearerToken = import.meta.env.PUBLIC_AUTH_TOKEN;
+
+let cards: IRecipe[] = [];
+
+const response = await fetch(`${import.meta.env.PUBLIC_CRUD_API_URL}/recipes`, {
+  method: 'GET',
+  headers: {
+    'Authorization': `Bearer ${bearerToken}`,
+  },
+});
+
+if (response.ok) {
+  const recipes = await response.json();
+  
+  cards = recipes.data;
+} else {
+  console.error('Failed to fetch recipes:', response.statusText);
+  cards = [];
+}
+---
+
+<div class="menu" id="Menu">
+  <h1>Our<span>Menu</span></h1>
+
+  <div class="menu_box">
+    {
+      cards.map((card) => (
+        <MenuCard
+          data={card}
+        />
+      ))
+    }
+  </div>
+</div>
