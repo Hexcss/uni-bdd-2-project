@@ -11,10 +11,11 @@ class RecipeImageController {
       if (!req.file) {
         return res.status(400).send('No image file provided.');
       }
-      const { recipe_id } = req.body;
+      const { recipe_id, imageName } = req.body;
       const newImage = await RecipeImageController.service.create({
         recipe_id,
         imageData: req.file.buffer,
+        imageName,
       });
       res.status(201).json(newImage);
     } catch (error) {
@@ -35,7 +36,11 @@ class RecipeImageController {
   static async updateImage(req: MulterRequest, res: Response) {
     try {
       const { recipe_id } = req.params;
-      const updateData = { imageData: req.file?.buffer };
+      const { imageName } = req.body;
+      const updateData = {
+        imageData: req.file?.buffer,
+        imageName,
+      };
       const updatedImage = await RecipeImageController.service.update(
         { recipe_id },
         updateData

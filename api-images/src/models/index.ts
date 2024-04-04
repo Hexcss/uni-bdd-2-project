@@ -9,6 +9,7 @@ const categoryImageSchema = new mongoose.Schema({
     unique: true,
   },
   imageData: { type: Buffer, required: true },
+  imageName: { type: String, required: true },
 });
 
 const recipeImageSchema = new mongoose.Schema({
@@ -19,6 +20,7 @@ const recipeImageSchema = new mongoose.Schema({
     unique: true,
   },
   imageData: { type: Buffer, required: true },
+  imageName: { type: String, required: true },
 });
 
 const CategoryImage = mongoose.model<ICategoryImage>(

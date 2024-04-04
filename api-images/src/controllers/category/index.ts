@@ -2,6 +2,7 @@ import { Response } from 'express';
 import { ICategoryImage, MulterRequest } from '../../utils/interfaces';
 import { CategoryImage } from '../../models';
 import { MongoService } from '../../services';
+import { loggingMiddleware } from '../../middlewares';
 
 class CategoryImageController {
   static service = new MongoService<ICategoryImage>(CategoryImage);
@@ -11,13 +12,16 @@ class CategoryImageController {
       if (!req.file) {
         return res.status(400).send('No image file provided.');
       }
-      const { category_id } = req.body;
+      const { category_id, imageName } = req.body;
+      console.log(req.file.filename);
       const newImage = await CategoryImageController.service.create({
         category_id,
         imageData: req.file.buffer,
+        imageName,
       });
       res.status(201).json(newImage);
     } catch (error) {
+      loggingMiddleware.logger.error(error.message);
       res.status(500).send(error.message);
     }
   }
@@ -37,7 +41,11 @@ class CategoryImageController {
   static async updateImage(req: MulterRequest, res: Response) {
     try {
       const { category_id } = req.params;
-      const updateData = { imageData: req.file?.buffer };
+      const { imageName } = req.body;
+      const updateData = {
+        imageData: req.file?.buffer,
+        imageName,
+      };
       const updatedImage = await CategoryImageController.service.update(
         { category_id },
         updateData
