@@ -1,0 +1,69 @@
+steps:
+  - id: "Building"
+    name: "gcr.io/cloud-builders/docker"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        docker build \
+        --build-arg AUTH_URL=$$GUSTUS_AUTH_URL \
+        --build-arg CRUD_URL=$$GUSTUS_CRUD_URL \
+        --build-arg IMAGE_URL=$$GUSTUS_IMAGE_URL \
+        --build-arg SECRET_KEY=$$GUSTUS_SECRET_KEY \
+        -t ${_IMAGE_LATEST} .
+
+
+    secretEnv:
+      - "GUSTUS_AUTH_URL"
+      - "GUSTUS_CRUD_URL"
+      - "GUSTUS_IMAGE_URL"
+      - "GUSTUS_SECRET_KEY"
+
+  - id: "Pushing"
+    name: "gcr.io/cloud-builders/docker"
+    args:
+      - "push"
+      - "${_IMAGE_LATEST}"
+
+  - id: "Deploying"
+    name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      - "run"
+      - "deploy"
+      - "${_PROJECT_NAME}"
+      - "--port=80"
+      - "--min-instances=0"
+      - "--max-instances=1"
+      - "--platform=managed"
+      - "--region=${_REGION}"
+      - "--allow-unauthenticated"
+      - "--image=${_IMAGE_LATEST}"
+      - "--project=$_GCLOUD_PROJECT"
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/${_PROJECT_ID}/secrets/GUSTUS_AUTH_URL/versions/latest
+      env: "GUSTUS_AUTH_URL"
+    - versionName: projects/${_PROJECT_ID}/secrets/GUSTUS_CRUD_URL/versions/latest
+      env: "GUSTUS_CRUD_URL"
+    - versionName: projects/${_PROJECT_ID}/secrets/GUSTUS_IMAGE_URL/versions/latest
+      env: "GUSTUS_IMAGE_URL"
+    - versionName: projects/${_PROJECT_ID}/secrets/GUSTUS_SECRET_KEY/versions/latest
+      env: "GUSTUS_SECRET_KEY"
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+images:
+  - "${_IMAGE_LATEST}"
+
+substitutions:
+  _REGION: "europe-west1"
+  _ARTIFACT_REGISTRY_REPO: "gustus"
+  _PROJECT_NAME: "gustus-cms"
+  _IMAGE: "${_REGION}-docker.pkg.dev/${_GCLOUD_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_PROJECT_NAME}"
+  _IMAGE_LATEST: "${_IMAGE}:latest"
+
+tags:
+  - master
+  - develop
