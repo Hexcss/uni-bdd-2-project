@@ -34,10 +34,12 @@
       grid-gap: 15px;
   
       .menu_card {
-        width: 325px;
+        width: 500px;
         height: 480px;
         padding-top: 10px;
         margin-bottom: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
         box-shadow: 0 0 10px rgba(0,0,0,0.2);
   
         .menu_image {
@@ -128,7 +130,7 @@
             color: white;
             background: #000;
             padding: 8px 10px;
-            margin: 0 80px;
+            margin: 10px 80px;
             transition: 0.3s;
           }
         }

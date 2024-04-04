@@ -301,3 +301,4 @@
 04-04-2024 22:07:40 [info]: 2024-04-04T20:07:40.951Z [GET]: /api/server/recipe-images/uSkBMJOSiO Status: 404 9.639ms  
 04-04-2024 22:08:53 [info]: 2024-04-04T20:08:53.629Z [GET]: /api/server/recipe-images/recipe0001 Status: 200 5.320ms  
 04-04-2024 22:08:53 [info]: 2024-04-04T20:08:53.631Z [GET]: /api/server/recipe-images/uSkBMJOSiO Status: 404 3.228ms  
+04-04-2024 22:10:43 [info]: Connected to MongoDB  

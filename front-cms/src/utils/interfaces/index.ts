@@ -8,6 +8,7 @@ export interface LoginFormState {
 export interface Environment {
   AUTH_API_URL: string | undefined;
   CRUD_API_URL: string | undefined;
+  IMAGE_API_URL: string | undefined;
   SECRET_KEY: string | undefined;
 }
 
@@ -49,3 +50,5 @@ export interface ITag {
   id: string;
   name: string;
 }
+
+export type ImageType = "category" | "recipe";

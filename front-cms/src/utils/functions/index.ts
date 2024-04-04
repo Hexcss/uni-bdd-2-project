@@ -52,3 +52,37 @@ export const transformPluralToSingular = (plural: string) => {
       return plural.replace(/s$/, "");
   }
 };
+
+export const convertToWebP = async (file: File) => {
+  return new Promise<File>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext("2d");
+        ctx?.drawImage(img, 0, 0);
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const newFile = new File(
+              [blob],
+              file.name.replace(/\.\w+$/, ".webp"),
+              {
+                type: "image/webp",
+              }
+            );
+            resolve(newFile);
+          } else {
+            reject(new Error("Could not convert image to WebP"));
+          }
+        }, "image/webp");
+      };
+      img.onerror = () => reject(new Error("Failed to load image"));
+      img.src = e.target?.result as string;
+    };
+    reader.onerror = () => reject(new Error("Failed to read file"));
+    reader.readAsDataURL(file);
+  });
+};

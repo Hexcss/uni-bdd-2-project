@@ -20,6 +20,8 @@ import { generateId } from "../../../utils/functions";
 import { getData, postData, updateData } from "../../../api/data";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "../../../context";
+import { getImage, uploadImage } from "../../../api/images";
+import { ImageUploadField } from "../../fields";
 
 interface RecipeFormProps {
   onClose: () => void;
@@ -33,8 +35,17 @@ const RecipeForm: React.FC<RecipeFormProps> = ({
   id
 }) => {
   const [recipe, setRecipe] = useState<IRecipe>(data);
+  const [file, setFile] = useState<File | null>(null);
+  const [httpMethod, setMethod] = useState<"post" | "put">("post");
+  const [imageName, setImageName] = useState<string>("");
   const userId = useAuth().userId;
   const queryClient = useQueryClient();
+
+  const { data: recipeImage } = useQuery({
+    queryKey: ["category-image", id],
+    queryFn: () => getImage("recipe", id),
+  });
+
 
   const { data: tags } = useQuery({
     queryKey: ["tags"],
@@ -63,6 +74,22 @@ const RecipeForm: React.FC<RecipeFormProps> = ({
     }
   }, [recipe, userId]);
 
+  useEffect(() => {
+    if (id && recipeImage?.data.length === 0) {
+      setMethod("post");
+    } else if (id && !(recipeImage?.data.length === 0)) {
+      setMethod("put");
+    } else if (!id) {
+      setMethod("post");
+    }
+  }, [recipeImage, id]);
+
+  useEffect(() => {
+    if (recipeImage?.data.length > 0) {
+      setImageName(recipeImage?.data[0].imageName);
+    }
+  }, [recipeImage]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRecipe({ ...recipe, [e.target.name]: e.target.value });
   };
@@ -75,6 +102,12 @@ const RecipeForm: React.FC<RecipeFormProps> = ({
       setRecipe({ ...recipe, [name]: value });
     }
   };
+
+  const handleFileChange = (newFile: File) => {
+    setFile(newFile);
+    setImageName(newFile.name);
+  };
+
 
   const handleArrayChange = (
     index: number,
@@ -99,7 +132,18 @@ const RecipeForm: React.FC<RecipeFormProps> = ({
   };
 
   const mutation = useMutation({
-    mutationFn: () => id ? updateData(recipe, "recipes") : postData(recipe, "recipes"),
+    mutationFn: async () => {
+      const response = id ? updateData(recipe, "recipes") : postData(recipe, "recipes")
+      if (file) {
+        const formData = new FormData();
+        formData.append("image", file);
+        formData.append("recipe_id", recipe.id);
+        formData.append("imageName", file.name);
+        await uploadImage(formData, "recipe", httpMethod, recipe.id);
+      }
+
+      return response;
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["recipes"] });
       onClose();
@@ -111,6 +155,26 @@ const RecipeForm: React.FC<RecipeFormProps> = ({
 
   const handleSubmit = async () => {
     mutation.mutate();
+  };
+
+  const handleDownloadImage = () => {
+    if (recipeImage?.data && recipeImage.data.length > 0) {
+      const buffer = recipeImage.data[0].imageData.data;
+      const imageName = recipeImage.data[0].imageName;
+
+      const blob = new Blob([new Uint8Array(buffer)], { type: "image/webp" });
+
+      const imageUrl = URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = imageUrl;
+      link.download = imageName || "downloaded_image";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      URL.revokeObjectURL(imageUrl);
+    }
   };
 
   return (
@@ -156,6 +220,14 @@ const RecipeForm: React.FC<RecipeFormProps> = ({
             fullWidth
             value={recipe.description}
             onChange={handleChange}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <ImageUploadField
+            value={imageName}
+            onFileChange={handleFileChange}
+            label="Recipe Image"
+            onDownload={handleDownloadImage}
           />
         </Grid>
         {/* Dynamic Fields for Ingredients */}

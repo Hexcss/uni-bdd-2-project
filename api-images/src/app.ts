@@ -11,12 +11,12 @@ const app: Express = express();
 
 connectDatabase().then(() => {
   app.set('trust proxy', 1);
+  app.use(cors());
   app.use(helmet());
   app.use(express.json());
   app.use(loggingMiddleware.morganMiddleware);
   app.use(limiter);
   app.use('/api/server', serverImagesRoutes);
-  app.use(cors());
 
   configureRoutes(app);
 });
