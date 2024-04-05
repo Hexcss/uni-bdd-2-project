@@ -15,7 +15,7 @@ steps:
       - compute
       - scp
       - gustus-image-api.tar.gz
-      - '$_GCE_USERNAME@$_GCE_INSTANCE:~/gustus-image-api/gustus-image-api.tar.gz'
+      - '$_GCE_USERNAME@$_GCE_INSTANCE:~/'
       - --zone=$_GCE_ZONE
       - --project=$_PROJECT_ID
 
@@ -29,6 +29,7 @@ steps:
       - '--zone=$_GCE_ZONE'
       - '--command'
       - |
+        mkdir ~/gustus-image-api && mv ~/gustus-image-api.tar.gz ~/gustus-image-api && \
         tar -zxvf ~/gustus-image-api/gustus-image-api.tar.gz -C ~/gustus-image-api && \
         cd ~/gustus-image-api && \
         sudo docker build -t gustus-image-api:latest . && \
