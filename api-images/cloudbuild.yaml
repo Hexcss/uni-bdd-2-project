@@ -29,6 +29,7 @@ steps:
       - '--zone=$_GCE_ZONE'
       - '--command'
       - |
+        rm -r ~/gustus-image-api && \
         mkdir -p ~/gustus-image-api && \
         tar -zxvf ~/gustus-image-api.tar.gz -C ~/gustus-image-api && \
         cd ~/gustus-image-api && \
