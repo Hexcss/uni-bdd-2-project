@@ -15,7 +15,7 @@ steps:
       - compute
       - scp
       - gustus-image-api.tar.gz
-      - '$_GCE_USERNAME@$_GCE_INSTANCE:~/gustus-image-api'
+      - '$_GCE_USERNAME@$_GCE_INSTANCE:~/gustus-image-api/'
       - --zone=$_GCE_ZONE
       - --project=$_PROJECT_ID
 
