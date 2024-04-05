@@ -1,0 +1,22 @@
+---
+import { Image } from "astro:assets";
+import PlaceHolder from "../../assets/images/Food-Plate.png"
+
+interface Props {
+    id: string;
+    title: string;
+    description: string;
+}
+
+const { id, title, description } = Astro.props as Props;
+
+---
+<div class="gallery_image">
+    <Image src={`${import.meta.env.PUBLIC_IMAGE_API_URL}/server/category-images/${id}` ?? PlaceHolder} alt={title} height={300} width={500} />
+
+    <h3>{title}</h3>
+    <p>
+        {description}
+    </p>
+    <a href={`/category/${id}`} class="gallery_btn">See Recipes</a>
+</div>

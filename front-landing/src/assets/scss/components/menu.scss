@@ -12,6 +12,7 @@
       span {
         color: #fac031;
         margin-left: 15px;
+        margin-right: 15px;
         font-family: mv boli;
   
         &::after {
@@ -30,8 +31,7 @@
       width: 95%;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-gap: 15px;
+      grid-template-columns: repeat(3, 1fr);  
   
       .menu_card {
         width: 500px;
