@@ -6,7 +6,7 @@ const bearerToken = import.meta.env.PUBLIC_AUTH_TOKEN;
 
 let cards: IRecipe[] = [];
 
-const response = await fetch(`${import.meta.env.PUBLIC_CRUD_API_URL}/recipes`, {
+const response = await fetch(`${import.meta.env.PUBLIC_CRUD_API_URL}/recipes?page=1&limit=9`, {
   method: 'GET',
   headers: {
     'Authorization': `Bearer ${bearerToken}`,
@@ -24,7 +24,7 @@ if (response.ok) {
 ---
 
 <div class="menu" id="Menu">
-  <h1>Our<span>Menu</span></h1>
+  <h1>Our<span>Latest</span>Recipes</h1>
 
   <div class="menu_box">
     {
@@ -34,5 +34,8 @@ if (response.ok) {
         />
       ))
     }
+  </div>
+  <div class="pagination">
+    <a href="/recipes" class="next">Explore All Recipes</a>
   </div>
 </div>

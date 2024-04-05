@@ -8,4 +8,4 @@ RUN npm install
 
 COPY . .
 
-CMD ["npx", "ts-node-dev", "--respawn", "--transpile-only", "./src/index.ts"]
+CMD ["npm", "run", "dev"]

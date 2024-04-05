@@ -22,6 +22,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "../../../context";
 import { getImage, uploadImage } from "../../../api/images";
 import { ImageUploadField } from "../../fields";
+import { snackbar } from "../../../utils/signals";
+import { useSignals } from "@preact/signals-react/runtime";
 
 interface RecipeFormProps {
   onClose: () => void;
@@ -32,8 +34,9 @@ interface RecipeFormProps {
 const RecipeForm: React.FC<RecipeFormProps> = ({
   onClose,
   data = EmptyRecipe,
-  id
+  id,
 }) => {
+  useSignals();
   const [recipe, setRecipe] = useState<IRecipe>(data);
   const [file, setFile] = useState<File | null>(null);
   const [httpMethod, setMethod] = useState<"post" | "put">("post");
@@ -45,7 +48,6 @@ const RecipeForm: React.FC<RecipeFormProps> = ({
     queryKey: ["category-image", id],
     queryFn: () => getImage("recipe", id),
   });
-
 
   const { data: tags } = useQuery({
     queryKey: ["tags"],
@@ -70,7 +72,11 @@ const RecipeForm: React.FC<RecipeFormProps> = ({
         authorId: userId!,
       });
     } else {
-      setRecipe({ ...recipe, updatedAt: Date.now().toString(), authorId: userId! });
+      setRecipe({
+        ...recipe,
+        updatedAt: Date.now().toString(),
+        authorId: userId!,
+      });
     }
   }, [recipe, userId]);
 
@@ -108,7 +114,6 @@ const RecipeForm: React.FC<RecipeFormProps> = ({
     setImageName(newFile.name);
   };
 
-
   const handleArrayChange = (
     index: number,
     value: string,
@@ -133,13 +138,19 @@ const RecipeForm: React.FC<RecipeFormProps> = ({
 
   const mutation = useMutation({
     mutationFn: async () => {
-      const response = id ? updateData(recipe, "recipes") : postData(recipe, "recipes")
+      const response = id
+        ? updateData(recipe, "recipes")
+        : postData(recipe, "recipes");
       if (file) {
         const formData = new FormData();
         formData.append("image", file);
         formData.append("recipe_id", recipe.id);
         formData.append("imageName", file.name);
-        const recipeImageData: IRecipeImageData = { image: file, recipe_id: recipe.id, imageName: file.name}
+        const recipeImageData: IRecipeImageData = {
+          image: file,
+          recipe_id: recipe.id,
+          imageName: file.name,
+        };
         await uploadImage(recipeImageData, "recipe", httpMethod, recipe.id);
       }
 
@@ -147,9 +158,20 @@ const RecipeForm: React.FC<RecipeFormProps> = ({
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["recipes"] });
+      queryClient.invalidateQueries({ queryKey: ["recipe"] });
+      snackbar.value = {
+        open: true,
+        message: id? "Recipe updated" : "Recipe created",
+        severity: "success",
+      }
       onClose();
     },
     onError: (error) => {
+      snackbar.value = {
+        open: true,
+        message: error.message,
+        severity: "error",
+      };
       console.error(error.message);
     },
   });
@@ -300,10 +322,11 @@ const RecipeForm: React.FC<RecipeFormProps> = ({
               name="tag_ids"
               value={recipe.tag_ids}
               onChange={handleSelectChange}
-              renderValue={(selected) => 
+              renderValue={(selected) =>
                 selected
-                  .map((selectedId) => 
-                    tagsData?.find((tag) => tag.id === selectedId)?.name || ''
+                  .map(
+                    (selectedId) =>
+                      tagsData?.find((tag) => tag.id === selectedId)?.name || ""
                   )
                   .join(", ")
               }
@@ -318,7 +341,9 @@ const RecipeForm: React.FC<RecipeFormProps> = ({
         </Grid>
       </Grid>
       <DialogActions>
-        <Button color="inherit" onClick={onClose}>Cancel</Button>
+        <Button color="inherit" onClick={onClose}>
+          Cancel
+        </Button>
         <Button type="submit">Submit</Button>
       </DialogActions>
     </form>

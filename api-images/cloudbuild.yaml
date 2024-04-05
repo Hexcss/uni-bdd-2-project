@@ -33,15 +33,19 @@ steps:
         mkdir -p ~/gustus-image-api && \
         tar -zxvf ~/gustus-image-api.tar.gz -C ~/gustus-image-api && \
         cd ~/gustus-image-api && \
-        sudo docker build -t gustus-image-api:latest . && \
-        sudo docker stop gustus-image-api-container || true && \
-        sudo docker run --rm -d --name gustus-image-api-container \
-          -p 3030:3003 \
-          -e NODE_ENV=$_NODE_ENV \
-          -e MONGO_URI=$_MONGO_URI \
-          -e JWT_KEY=$_JWT_KEY \
-          gustus-image-api:latest
+        sudo docker compose down && \
+        sudo docker comose up --build -d
 
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'Cleanup'
+    args:
+      - compute
+      - ssh
+      - '$_GCE_USERNAME@$_GCE_INSTANCE'
+      - '--zone=$_GCE_ZONE'
+      - '--command'
+      - |
+        rm ~/gustus-image-api.tar.gz
 options:
   logging: CLOUD_LOGGING_ONLY
 

@@ -10,7 +10,7 @@ class CategoryImageController {
 
   static async uploadImage(req: Request, res: Response) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { category_id, imageName } = (req as any).rawBody;
+    const { category_id, imageName } = req.body;
     try {
       if (
         !req.files ||

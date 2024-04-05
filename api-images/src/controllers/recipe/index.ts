@@ -10,7 +10,7 @@ class RecipeImageController {
 
   static async uploadImage(req: Request, res: Response) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { recipe_id } = (req as any).rawBody;
+    const { recipe_id } = req.body;
     try {
       if (
         !req.files ||
