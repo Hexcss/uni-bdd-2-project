@@ -19,7 +19,7 @@ async function uploadImage(
     method: method,
     url: `${BASE_URL}${url}`,
     data: formData,
-    headers: { "Content-Type": "multipart/form-data",  "Authorization": "Bearer " + authToken},
+    headers: { "Content-Type": "application/jos",  "Authorization": "Bearer " + authToken},
   });
 }
 
