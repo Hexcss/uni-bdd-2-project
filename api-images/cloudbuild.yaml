@@ -38,7 +38,7 @@ steps:
           -p 3030:3000 \
           -e NODE_ENV=$_NODE_ENV \
           -e MONGO_URI=$_MONGO_URI \
-          -e JWT_KEY=$_JWT_KEY \ 
+          -e JWT_KEY=$_JWT_KEY \
           gustus-image-api:latest
 
 options:
