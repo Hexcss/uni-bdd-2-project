@@ -19,6 +19,6 @@ COPY package*.json ./
 
 RUN npm install --only=production
 
-EXPOSE 3003
+EXPOSE 3010
 
 CMD ["node", "dist/index.js"]

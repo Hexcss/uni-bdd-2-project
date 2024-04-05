@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
 
       - name: Set up Git
         run: |
@@ -24,24 +26,31 @@ jobs:
         run: |
           FOLDERS="api-crud api-auth api-images front-cms front-landing"
           for folder in $FOLDERS; do
-            # Always sync changes
-            echo "Syncing $folder"
-            # Check if the branch exists, create if not
-            if ! git ls-remote --heads https://x-access-token:${ACCESS_TOKEN}@github.com/${REPO} $folder; then
+            echo "Checking for changes in $folder"
+
+            # Ensure all branches are available locally
+            git fetch --all
+
+            # Check if the branch exists
+            if git show-ref --verify --quiet refs/heads/$folder; then
+              # Branch exists, compare it with the master branch
+              if ! git diff --quiet origin/master:$folder $folder; then
+                echo "$folder has changes. Syncing..."
+                # Logic to sync changes
+                git subtree split --prefix=$folder -b temp-branch
+                git checkout $folder
+                git merge temp-branch -m "Syncing $folder with master"
+                git push https://x-access-token:${ACCESS_TOKEN}@github.com/${REPO} $folder
+                git checkout master
+                git branch -D temp-branch
+              else
+                echo "No changes in $folder. No sync needed."
+              fi
+            else
+              # Branch does not exist, create and push
               echo "Branch $folder does not exist, creating from master"
-              git subtree split --prefix=$folder -b $folder-branch
-              git push https://x-access-token:${ACCESS_TOKEN}@github.com/${REPO} $folder-branch:$folder
-              git branch -D $folder-branch
+              git subtree split --prefix=$folder -b $folder
+              git push https://x-access-token:${ACCESS_TOKEN}@github.com/${REPO} $folder:$folder
+              git branch -D $folder
             fi
-
-            # Create a temporary branch to push changes
-            git subtree split --prefix=$folder -b temp-branch
-            # Ensure branch is up to date or create if it doesn't exist
-            git fetch origin $folder:$folder || git branch $folder origin/master
-            git checkout $folder
-            git reset --hard temp-branch
-            git push https://x-access-token:${ACCESS_TOKEN}@github.com/${REPO} $folder -f
-            git checkout master
-            git branch -D temp-branch
-
           done
