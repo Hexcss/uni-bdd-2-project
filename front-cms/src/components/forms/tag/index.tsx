@@ -5,6 +5,8 @@ import { EmptyTag } from '../../../utils/constants';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postData, updateData } from '../../../api/data';
 import { generateId } from '../../../utils/functions';
+import { snackbar } from '../../../utils/signals';
+import { useSignals } from '@preact/signals-react/runtime';
 
 interface TagFormProps {
   onClose: () => void;
@@ -13,6 +15,7 @@ interface TagFormProps {
 }
 
 const TagForm: React.FC<TagFormProps> = ({ onClose, data = EmptyTag, id }) => {
+  useSignals();
   const queryClient = useQueryClient();
   const [tag, setTag] = useState<ITag>(data);
 
@@ -30,9 +33,20 @@ const TagForm: React.FC<TagFormProps> = ({ onClose, data = EmptyTag, id }) => {
     mutationFn: () => id ? updateData(tag, "tags") : postData(tag, "tags"),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tags"] });
+      queryClient.invalidateQueries({ queryKey: ["tag"] });
+      snackbar.value = {
+        open: true,
+        message: id? "Tag updated" : "Tag created",
+        severity: "success",
+      }
       onClose();
     },
     onError: (error) => {
+      snackbar.value = {
+        open: true,
+        message: error.message,
+        severity: "error",
+      }
       console.error(error.message);
     },
   });

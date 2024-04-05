@@ -7,6 +7,8 @@ import { postData, updateData } from "../../../api/data";
 import { generateId } from "../../../utils/functions";
 import { ImageUploadField } from "../../index";
 import { getImage, uploadImage } from "../../../api/images";
+import { useSignals } from "@preact/signals-react/runtime";
+import { snackbar } from "../../../utils/signals";
 
 interface CategoryFormProps {
   onClose: () => void;
@@ -19,6 +21,7 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
   data = EmptyCategory,
   id,
 }) => {
+  useSignals();
   const queryClient = useQueryClient();
   const [category, setCategory] = useState<ICategory>(data);
   const [file, setFile] = useState<File | null>(null);
@@ -76,9 +79,20 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["categories"] });
+      queryClient.invalidateQueries({ queryKey: ["category"] });
+      snackbar.value = {
+        open: true,
+        message: id? "Category updated" : "Category created",
+        severity: "success",
+      }
       onClose();
     },
     onError: (error) => {
+      snackbar.value = {
+        open: true,
+        message: error.message,
+        severity: "error",
+      }
       console.error(error.message);
     },
   });

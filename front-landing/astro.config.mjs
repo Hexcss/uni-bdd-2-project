@@ -1,6 +1,10 @@
 import { defineConfig } from 'astro/config';
+import node from '@astrojs/node';
 
-// https://astro.build/config
 export default defineConfig({
-    domains: ['localhost'],
+    domains: ['gustus-images-hexcss-dev'],
+    output: 'server',
+    adapter: node({
+        mode: 'standalone',
+    }),
 });

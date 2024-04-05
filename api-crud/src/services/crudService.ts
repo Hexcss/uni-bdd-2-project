@@ -39,6 +39,7 @@ const getAll = async (req: Request, res: Response, dataType: string) => {
   const limit = parseInt(req.query.limit as string) || 10;
   const skipIndex = (page - 1) * limit;
   const search = req.query.search as string;
+  const category = req.query.category as string;
 
   try {
     let filter = {};
@@ -46,6 +47,13 @@ const getAll = async (req: Request, res: Response, dataType: string) => {
       const escapedSearch = escapeRegExp(search);
       filter = {
         name: { $regex: new RegExp(escapedSearch, 'i') },
+      };
+    }
+
+    if (category) {
+      filter = {
+        ...filter,
+        category_id: category,
       };
     }
 

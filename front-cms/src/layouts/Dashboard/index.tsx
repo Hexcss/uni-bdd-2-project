@@ -19,10 +19,13 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import CategoryIcon from "@mui/icons-material/Category";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import { isDrawerClose } from "../../utils/signals";
+import SiteSnackbar from "../../components/snackbar";
+import { useSignals } from "@preact/signals-react/runtime";
 
 const drawerWidth = 240;
 
 const DashboardLayout: React.FC = () => {
+  useSignals();
   const drawerItems = [
     { text: "Recipes", icon: <MenuBookIcon /> },
     { text: "Categories", icon: <CategoryIcon /> },
@@ -106,6 +109,7 @@ const DashboardLayout: React.FC = () => {
         <Toolbar />
         <Outlet />
       </Box>
+      <SiteSnackbar />
     </Box>
   );
 };

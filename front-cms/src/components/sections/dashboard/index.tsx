@@ -8,6 +8,7 @@ import {
   Button,
   Pagination,
   TextField,
+  CircularProgress,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { DashboardSectionProps } from "../../../utils/interfaces";
@@ -111,27 +112,33 @@ const DashboardSection: React.FC<DashboardSectionProps> = ({ title }) => {
         onClose={handleModalClose}
         subRoute={currentSubRoute}
       />
-      <Grid container spacing={2} sx={{ minHeight: gridHeight }}>
-        {query.data?.data?.map((item) => (
-          <Grid item xs={12} sm={6} md={4} key={item.id}>
-            <Card
-              onClick={() => handleCardClick(item.id)}
-              sx={{
-                cursor: "pointer",
-                transition: "0.3s",
-                "&:hover": {
-                  boxShadow: "0 4px 20px 0 rgba(0,0,0,0.12)",
-                  transform: "scale(1.02)",
-                },
-              }}
-            >
-              <CardContent>
-                <Typography variant="h6">{item.name}</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+      {query.isLoading ? (
+        <Box sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}>
+          <CircularProgress />
+        </Box>
+      ) : (
+        <Grid container spacing={2} sx={{ minHeight: gridHeight }}>
+          {query.data?.data?.map((item) => (
+            <Grid item xs={12} sm={6} md={4} key={item.id}>
+              <Card
+                onClick={() => handleCardClick(item.id)}
+                sx={{
+                  cursor: "pointer",
+                  transition: "0.3s",
+                  "&:hover": {
+                    boxShadow: "0 4px 20px 0 rgba(0,0,0,0.12)",
+                    transform: "scale(1.02)",
+                  },
+                }}
+              >
+                <CardContent>
+                  <Typography variant="h6">{item.name}</Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      )}
       <Box sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}>
         <Pagination
           count={totalPages}
