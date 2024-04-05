@@ -452,3 +452,21 @@
 05-04-2024 01:54:55 [info]: Retrieved images for category 796LRE75iW  
 05-04-2024 01:54:55 [info]: 2024-04-04T23:54:55.249Z [GET]: /api/category-images/796LRE75iW Status: 200 10.181ms  
 05-04-2024 01:54:56 [info]: 2024-04-04T23:54:56.666Z [GET]: /api/category-images Status: 404 1.450ms  
+05-04-2024 02:04:35 [info]: Retrieved images for category R0hI6IWxac  
+05-04-2024 02:04:35 [info]: 2024-04-05T00:04:35.292Z [GET]: /api/category-images/R0hI6IWxac Status: 200 4.706ms  
+05-04-2024 02:04:39 [warn]: Upload attempt without file by ::ffff:127.0.0.1 for category R0hI6IWxac  
+05-04-2024 02:04:39 [info]: 2024-04-05T00:04:39.800Z [POST]: /api/category-images Status: 400 1.825ms  
+05-04-2024 02:05:14 [info]: Retrieved images for category R0hI6IWxac  
+05-04-2024 02:05:14 [info]: 2024-04-05T00:05:14.488Z [GET]: /api/category-images/R0hI6IWxac Status: 304 4.729ms  
+05-04-2024 02:05:18 [info]: Retrieved images for category R0hI6IWxac  
+05-04-2024 02:05:18 [info]: 2024-04-05T00:05:18.792Z [GET]: /api/category-images/R0hI6IWxac Status: 304 2.724ms  
+05-04-2024 02:05:21 [info]: Retrieved images for category R0hI6IWxac  
+05-04-2024 02:05:21 [info]: 2024-04-05T00:05:21.571Z [GET]: /api/category-images/R0hI6IWxac Status: 304 2.733ms  
+05-04-2024 02:05:25 [warn]: Upload attempt without file by ::ffff:127.0.0.1 for category R0hI6IWxac  
+05-04-2024 02:05:25 [info]: 2024-04-05T00:05:25.233Z [POST]: /api/category-images Status: 400 1.381ms  
+05-04-2024 02:05:55 [info]: Retrieved images for category R0hI6IWxac  
+05-04-2024 02:05:55 [info]: 2024-04-05T00:05:55.748Z [GET]: /api/category-images/R0hI6IWxac Status: 304 6.673ms  
+05-04-2024 02:08:21 [info]: Retrieved images for category R0hI6IWxac  
+05-04-2024 02:08:21 [info]: 2024-04-05T00:08:21.417Z [GET]: /api/category-images/R0hI6IWxac Status: 304 5.666ms  
+05-04-2024 02:08:52 [info]: Connected to MongoDB  
+05-04-2024 02:09:17 [info]: Connected to MongoDB  
