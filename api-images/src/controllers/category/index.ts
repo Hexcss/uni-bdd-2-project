@@ -9,7 +9,8 @@ class CategoryImageController {
   static service = new MongoService<ICategoryImage>(CategoryImage);
 
   static async uploadImage(req: Request, res: Response) {
-    const { category_id, imageName } = req.body;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { category_id, imageName } = (req as any).rawBody;
     try {
       if (
         !req.files ||
