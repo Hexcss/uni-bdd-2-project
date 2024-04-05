@@ -22,7 +22,7 @@ jobs:
           REPO: Hexcss/uni-bdd-2-project.git
           ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
         run: |
-          FOLDERS="api-crud api-auth front-cms front-landing"
+          FOLDERS="api-crud api-auth api-images front-cms front-landing"
           for folder in $FOLDERS; do
             # Always sync changes
             echo "Syncing $folder"

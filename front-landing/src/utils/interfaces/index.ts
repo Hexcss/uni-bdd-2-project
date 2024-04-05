@@ -1,15 +1,3 @@
-export interface ICategoryImage extends Document {
-  category_id: string;
-  imageData: Buffer;
-  imageName: string;
-}
-
-export interface IRecipeImage extends Document {
-  recipe_id: string;
-  imageData: Buffer;
-  imageName: string;
-}
-
 export interface IRecipe {
   id: string;
   name: string;

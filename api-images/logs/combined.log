@@ -1396,3 +1396,6 @@
 05-04-2024 20:59:20 [info]: 2024-04-05T18:59:20.149Z [GET]: /api/category-images Status: 404 3.677ms  
 05-04-2024 20:59:22 [info]: 2024-04-05T18:59:22.394Z [GET]: /api/recipe-images Status: 404 1.226ms  
 05-04-2024 20:59:23 [info]: 2024-04-05T18:59:23.509Z [GET]: /api/recipe-images Status: 404 5.696ms  
+05-04-2024 21:00:03 [info]: 2024-04-05T19:00:03.762Z [GET]: /api/server/recipe-images/recipe0001 Status: 200 11.359ms  
+05-04-2024 21:00:03 [info]: 2024-04-05T19:00:03.775Z [GET]: /api/server/recipe-images/uSkBMJOSiO Status: 200 5.656ms  
+05-04-2024 21:00:03 [info]: 2024-04-05T19:00:03.782Z [GET]: /api/server/recipe-images/lgPD00oPj7 Status: 200 4.576ms  
