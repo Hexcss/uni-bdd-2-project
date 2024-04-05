@@ -12,7 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 
+          fetch-depth: 0 # Fetch all history for all tags and branches
 
       - name: Set up Git
         run: |
