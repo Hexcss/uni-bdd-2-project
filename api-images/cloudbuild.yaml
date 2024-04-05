@@ -34,7 +34,7 @@ steps:
         tar -zxvf ~/gustus-image-api.tar.gz -C ~/gustus-image-api && \
         cd ~/gustus-image-api && \
         sudo docker compose down && \
-        sudo docker comose up --build -d
+        sudo docker compose up --build -d
 
   - name: 'gcr.io/cloud-builders/gcloud'
     id: 'Cleanup'

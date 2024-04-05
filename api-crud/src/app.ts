@@ -4,7 +4,7 @@ import { connectDatabase } from './services';
 import limiter from './middlewares/limiter';
 import configureRoutes from './routes';
 import cors from 'cors';
-import { authMiddleware, loggingMiddleware } from './middlewares';
+import { loggingMiddleware } from './middlewares';
 
 const app: Express = express();
 
@@ -15,7 +15,6 @@ connectDatabase().then(() => {
   app.use(express.json());
   app.use(loggingMiddleware.morganMiddleware);
   app.use(limiter);
-  app.use(authMiddleware);
 
   configureRoutes(app);
 });

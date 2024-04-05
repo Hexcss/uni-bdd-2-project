@@ -1399,3 +1399,8 @@
 05-04-2024 21:00:03 [info]: 2024-04-05T19:00:03.762Z [GET]: /api/server/recipe-images/recipe0001 Status: 200 11.359ms  
 05-04-2024 21:00:03 [info]: 2024-04-05T19:00:03.775Z [GET]: /api/server/recipe-images/uSkBMJOSiO Status: 200 5.656ms  
 05-04-2024 21:00:03 [info]: 2024-04-05T19:00:03.782Z [GET]: /api/server/recipe-images/lgPD00oPj7 Status: 200 4.576ms  
+05-04-2024 21:19:40 [info]: Connected to MongoDB  
+05-04-2024 21:19:46 [info]: Connected to MongoDB  
+05-04-2024 21:20:12 [info]: Connected to MongoDB  
+05-04-2024 21:20:21 [info]: Connected to MongoDB  
+05-04-2024 21:20:23 [info]: Connected to MongoDB  
