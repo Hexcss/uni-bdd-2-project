@@ -35,7 +35,7 @@ steps:
         sudo docker build -t gustus-image-api:latest . && \
         sudo docker stop gustus-image-api-container || true && \
         sudo docker run --rm -d --name gustus-image-api-container \
-          -p 3030:3000 \
+          -p 3030:3003 \
           -e NODE_ENV=$_NODE_ENV \
           -e MONGO_URI=$_MONGO_URI \
           -e JWT_KEY=$_JWT_KEY \
