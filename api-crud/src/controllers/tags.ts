@@ -34,7 +34,16 @@ const createTag = async (req: Request, res: Response): Promise<void> => {
 };
 
 const getTagById = async (req: Request, res: Response) => {
-  CrudServices.getById(req, res, 'Tag');
+  try {
+    const tag = await tagService.findOne({id: req.params.id});
+    if (!tag) {
+      res.status(404).send('Tag not found');
+      return;
+    }
+    res.json(tag);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 };
 
 const updateTag = async (req: Request, res: Response) => {
