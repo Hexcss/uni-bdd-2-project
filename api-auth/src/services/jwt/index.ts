@@ -3,26 +3,24 @@ import { environment } from '../../config';
 import { IUser } from '../../utils/interfaces';
 
 class JwtService {
-  static generateToken(user: IUser): Promise<string> {
+  static generateToken(user: IUser, isSpecial: boolean): Promise<string> {
     const tokenPayload = {
       userId: user._id,
       email: user.email,
     };
-    const tokenExpiration = environment.JWT_EXPIRATION;
 
     return new Promise((resolve, reject) => {
-      sign(
-        tokenPayload,
-        environment.JWT_KEY,
-        { expiresIn: tokenExpiration },
-        (err, token) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(token!);
-          }
+      const signOptions = isSpecial
+        ? {}
+        : { expiresIn: environment.JWT_EXPIRATION };
+
+      sign(tokenPayload, environment.JWT_KEY, signOptions, (err, token) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(token!);
         }
-      );
+      });
     });
   }
 }

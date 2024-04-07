@@ -2,10 +2,9 @@
 import { Image } from "astro:assets";
 import logo from "../../assets/images/logo.png";
 
-const cmsUrl = import.meta.env.PUBLIC_CMS_URL;
+const cmsUrl: string = import.meta.env.PUBLIC_CMS_URL;
 
 ---
-
 <nav>
   <div class="logo">
     <Image src={logo} alt="Webiste Cooking Logo" height={50} width={200} />
@@ -18,8 +17,8 @@ const cmsUrl = import.meta.env.PUBLIC_CMS_URL;
   </ul>
 
   <div class="icon">
-    <a href={cmsUrl}>
+    <link href={cmsUrl}>
       <i class="fa-solid fa-user"></i>
-    </a>
+    </link>
   </div>
 </nav>
