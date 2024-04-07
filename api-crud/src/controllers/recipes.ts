@@ -48,7 +48,19 @@ const getRecipe = async (req: Request, res: Response): Promise<void> => {
 };
 
 const updateRecipe = async (req: Request, res: Response) => {
-  CrudServices.update(req, res, 'Recipe');
+  try {
+    const recipe = await recipeService.update(
+      {id: req.params.id },
+      req.body
+    );
+    if (!recipe) {
+      res.status(404).send('Recipe not found');
+      return;
+    }
+    res.json(recipe);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 };
 
 const deleteRecipe = async (req: Request, res: Response) => {
