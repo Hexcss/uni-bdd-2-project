@@ -1,12 +1,37 @@
+
 import { Request, Response } from 'express';
-import CrudServices from '../services/crudService';
+import { MongoService } from '../services';
+import { RecipeModel } from '../models';
+
+const recipeService = new MongoService(RecipeModel);
 
 const getAllRecipes = async (req: Request, res: Response): Promise<void> => {
-  CrudServices.getAll(req, res, 'Recipe');
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 10;
+  const search = req.query.search as string;
+
+  try {
+    const {data, totalCount } = await recipeService.find(
+      {},
+      page,
+      limit,
+      null,
+      null,
+      search
+    );
+    res.json({data, totalCount});
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 };
 
 const createRecipe = async (req: Request, res: Response): Promise<void> => {
-  CrudServices.create(req, res, 'Recipe');
+  try {
+    const recipe = await recipeService.create(req.body);
+    res.status(201).json(recipe);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 };
 
 const getRecipe = async (req: Request, res: Response) => {
