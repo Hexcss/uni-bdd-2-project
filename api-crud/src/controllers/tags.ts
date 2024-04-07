@@ -63,7 +63,16 @@ const updateTag = async (req: Request, res: Response) => {
 };
 
 const deleteTag = async (req: Request, res: Response) => {
-  CrudServices.deleteById(req, res, 'Tag');
+  try {
+    const result = await tagService.delete({id: req.params.id});
+    if (result?.deletedCount === 0) {
+      res.status(404).send('Tag not found');
+      return;
+    }
+    res.status(204).send();
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 };
 
 const tagController = {
