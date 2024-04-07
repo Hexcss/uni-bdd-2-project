@@ -25,7 +25,12 @@ const getAllTags = async (req: Request, res: Response): Promise<void> => {
 };
 
 const createTag = async (req: Request, res: Response): Promise<void> => {
-  CrudServices.create(req, res, 'Tag');
+  try {
+    const tag = await tagService.create(req.body);
+    res.status(201).json(tag);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 };
 
 const getTagById = async (req: Request, res: Response) => {
