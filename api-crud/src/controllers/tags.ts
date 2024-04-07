@@ -47,7 +47,19 @@ const getTagById = async (req: Request, res: Response) => {
 };
 
 const updateTag = async (req: Request, res: Response) => {
-  CrudServices.update(req, res, 'Tag');
+  try {
+    const tag = await tagService.update(
+      {id: req.params.id},
+      req.body
+    );
+    if (!tag) {
+      res.status(404).send('Tag not found');
+      return;
+    }
+    res.json(tag);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 };
 
 const deleteTag = async (req: Request, res: Response) => {
