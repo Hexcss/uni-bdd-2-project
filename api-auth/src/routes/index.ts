@@ -14,6 +14,8 @@ const router = express.Router();
 
 router.post('/login', validateLogin, loginController.login);
 
+router.post('generateSpecialToken', validateLogin, loginController.generateSpecialToken);
+
 router.get('/profile/:id', profileController.getProfile);
 router.put('/profile/:id', profileController.updateProfile);
 router.delete('/profile/:id', profileController.deleteProfile);
