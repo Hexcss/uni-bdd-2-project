@@ -64,7 +64,16 @@ const updateRecipe = async (req: Request, res: Response) => {
 };
 
 const deleteRecipe = async (req: Request, res: Response) => {
-  CrudServices.deleteById(req, res, 'Recipe');
+  try {
+    const result = await recipeService.delete({ id: req.params.id });
+    if (result?.deletedCount === 0) {
+      res.status(404).send('Recipe not found');
+      return;
+    }
+    res.status(204).send();
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 };
 
 const recipesController = {
