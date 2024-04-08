@@ -70,3 +70,7 @@ app.listen(3000, () => {
 });
 ```
 
+### 6. Verificación:
+- Inicia tu aplicación web y visita la URL donde has configurado la ruta para mostrar imágenes.
+- Verifica que las imágenes se muestren correctamente en el navegador.
+
