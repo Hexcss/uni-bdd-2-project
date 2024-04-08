@@ -1,0 +1,68 @@
+section {
+    width: 100%;
+    height: 100vh;
+  
+    .main {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      position: relative;
+      top: 130px;
+  
+      .men_text h1 {
+        font-size: 60px;
+        position: relative;
+        top: -90px;
+        left: 20px;
+  
+        span {
+          margin-left: 15px;
+          color: #fac031;
+          font-family: mv boli;
+          line-height: 22px;
+          font-size: 70px;
+        }
+      }
+  
+      .main_image img {
+        width: 700px;
+        position: relative;
+        left: 70px;
+      }
+    }
+  
+    p {
+      width: 650px;
+      text-align: justify;
+      position: relative;
+      left: 123px;
+      bottom: 120px;
+      line-height: 22px;
+    }
+  
+    .main_btn {
+      background: #fac031;
+      position: relative;
+      left: 123px;
+      bottom: 30px;
+      width: 150px;
+      cursor: pointer;
+      padding: 12px 25px;
+  
+      a {
+        color: #fff;
+        margin-right: 5px;
+        text-decoration: none;
+      }
+  
+      i {
+        color: #fff;
+        transition: 0.3s;
+  
+        &:hover {
+          transform: translateX(7px);
+        }
+      }
+    }
+  }
+  

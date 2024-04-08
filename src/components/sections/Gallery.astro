@@ -1,0 +1,44 @@
+---
+import type { ICategory } from "../../utils/interfaces";
+import GalleryCard from "../cards/GalleryCard.astro";
+
+const bearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjBiMDllNzIwNzBkNTllNjhmNWM3OTkiLCJlbWFpbCI6Imphdmllci5jYWRlckBnbWFpbC5jb20iLCJpYXQiOjE3MTI0NzgxMjd9.RiRHb-5G5DrMxvcJF3SLDiz2j6sfamYyYPmNPWhGrWw";
+
+let categories: ICategory[] = [];
+
+const categoryResponse = await fetch(
+  `${import.meta.env.PUBLIC_CRUD_API_URL}/categories/?page=1&limit=6`,
+  {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+    },
+  }
+);
+
+if (categoryResponse.ok) {
+  const categoriesData = await categoryResponse.json();
+  categories = categoriesData.data;
+} else {
+  console.error("Failed to fetch category:", categoryResponse.statusText);
+}
+---
+
+<div class="gallery" id="Gallery">
+  <h1>Our<span>Latest</span>Categories</h1>
+
+  <div class="gallery_image_box">
+    {
+      categories.map((category) => (
+        <GalleryCard
+          id={category.id}
+          title={category.name}
+          description={category.description!}
+        />
+      ))
+    }
+  </div>
+  <div class="pagination">
+    <a href="/categories" class="next">Explore All Categories</a>
+  </div>
+</div>

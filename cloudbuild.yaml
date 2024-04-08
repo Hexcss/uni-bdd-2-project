@@ -1,0 +1,52 @@
+steps:
+  - id: "Building"
+    name: "gcr.io/cloud-builders/docker"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        docker build \
+        --build-arg AUTH_TOKEN=${_GUSTUS_AUTH_TOKEN} \
+        --build-arg CRUD_URL=${_GUSTUS_CRUD_URL} \
+        --build-arg IMAGE_URL=${_GUSTUS_IMAGE_URL} \
+        --build-arg CMS_URL=${_GUSTUS_CMS_URL} \
+        -t ${_IMAGE_LATEST} .
+
+  - id: "Pushing"
+    name: "gcr.io/cloud-builders/docker"
+    args:
+      - "push"
+      - "${_IMAGE_LATEST}"
+
+  - id: "Deploying"
+    name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      - "run"
+      - "deploy"
+      - "${_PROJECT_NAME}"
+      - "--port=4321"
+      - "--min-instances=0"
+      - "--max-instances=1"
+      - "--platform=managed"
+      - "--region=${_REGION}"
+      - "--allow-unauthenticated"
+      - "--image=${_IMAGE_LATEST}"
+      - "--project=$_GCLOUD_PROJECT"
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+images:
+  - "${_IMAGE_LATEST}"
+
+substitutions:
+  _REGION: "europe-west1"
+  _ARTIFACT_REGISTRY_REPO: "gustus"
+  _PROJECT_NAME: "gustus-blog"
+  _IMAGE: "${_REGION}-docker.pkg.dev/${_GCLOUD_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_PROJECT_NAME}"
+  _IMAGE_LATEST: "${_IMAGE}:latest"
+
+tags:
+  - master
+  - develop

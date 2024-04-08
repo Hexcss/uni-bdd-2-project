@@ -1,0 +1,72 @@
+---
+import type { IRecipe } from "../../utils/interfaces";
+import "../../assets/scss/styles.scss";
+import Layout from "../../layouts/Layout.astro";
+import MenuCard from "../../components/cards/MenuCard.astro";
+
+export const prerender = true;
+
+export async function getStaticPaths({ paginate }: { paginate: any }) {
+  const bearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjBiMDllNzIwNzBkNTllNjhmNWM3OTkiLCJlbWFpbCI6Imphdmllci5jYWRlckBnbWFpbC5jb20iLCJpYXQiOjE3MTI0NzgxMjd9.RiRHb-5G5DrMxvcJF3SLDiz2j6sfamYyYPmNPWhGrWw";
+
+  let cards: IRecipe[] = [];
+
+  const response = await fetch(
+    `${import.meta.env.PUBLIC_CRUD_API_URL}/recipes?page=1&limit=9`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${bearerToken}`,
+      },
+    }
+  );
+
+  if (response.ok) {
+    const recipes = await response.json();
+
+    cards = recipes.data;
+  } else {
+    console.error("Failed to fetch recipes:", response.statusText);
+    cards = [];
+  }
+
+  return paginate(cards, { pageSize: 9 });
+}
+
+interface Props {
+  page: any;
+}
+
+const { page } = Astro.props as Props;
+---
+
+<Layout title="Cooking Website">
+  <main class="menu" id="Menu">
+    <h1 style="margin-top: 50px;">Our<span>Recipes</span></h1>
+
+    <div class="menu_box">
+      {page.data.map((card: any) => <MenuCard data={card} />)}
+    </div>
+
+    <div class="pagination">
+      {
+        page.url.prev ? (
+          <a href={page.url.prev} class="prev">
+            Previous
+          </a>
+        ) : (
+          <span class="prev disabled">Previous</span>
+        )
+      }
+      {
+        page.url.next ? (
+          <a href={page.url.next} class="next">
+            Next
+          </a>
+        ) : (
+          <span class="next disabled">Next</span>
+        )
+      }
+    </div>
+  </main>
+</Layout>

@@ -1,0 +1,41 @@
+---
+import type { IRecipe } from "../../utils/interfaces";
+import "../../assets/scss/styles.scss";
+import Layout from "../../layouts/Layout.astro";
+import MenuCard from "../../components/cards/MenuCard.astro";
+
+const { category } = Astro.params;
+
+const bearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjBiMDllNzIwNzBkNTllNjhmNWM3OTkiLCJlbWFpbCI6Imphdmllci5jYWRlckBnbWFpbC5jb20iLCJpYXQiOjE3MTI0NzgxMjd9.RiRHb-5G5DrMxvcJF3SLDiz2j6sfamYyYPmNPWhGrWw";
+
+let cards: IRecipe[] = [];
+
+const response = await fetch(
+  `${import.meta.env.PUBLIC_CRUD_API_URL}/recipes?category=${category}`,
+  {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+    },
+  }
+);
+
+if (response.ok) {
+  const recipes = await response.json();
+
+  cards = recipes.data;
+} else {
+  console.error("Failed to fetch recipes:", response.statusText);
+  cards = [];
+}
+---
+
+<Layout title="Cooking Website">
+  <main class="menu" id="Menu">
+    <h1 style="margin-top: 50px;">Our<span>Recipes</span></h1>
+
+    <div class="menu_box">
+      {cards.map((card: any) => <MenuCard data={card} />)}
+    </div>
+  </main>
+</Layout>

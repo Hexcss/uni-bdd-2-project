@@ -1,0 +1,29 @@
+FROM node:20-alpine as build
+
+ARG AUTH_TOKEN
+ARG CRUD_URL
+ARG IMAGE_URL
+ARG CMS_URL
+
+ENV PUBLIC_AUTH_TOKEN=$AUTH_URL \
+    PUBLIC_CRUD_API_URL=$CRUD_URL \
+    PUBLIC_IMAGE_API_URL=$IMAGE_URL \
+    PUBLIC_CMS_URL=$CMS_URL
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .    
+
+RUN npm run build
+
+ENV HOST=0.0.0.0
+
+ENV PORT=4321
+
+EXPOSE 4321
+
+CMD node ./dist/server/entry.mjs

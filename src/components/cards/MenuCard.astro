@@ -1,0 +1,51 @@
+---
+import { Image } from "astro:assets";
+import PlaceHolder from "../../assets/images/Food-Plate.png";
+import type { ICategory, IRecipe } from "../../utils/interfaces";
+
+interface Props {
+  data: IRecipe;
+}
+
+const bearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjBiMDllNzIwNzBkNTllNjhmNWM3OTkiLCJlbWFpbCI6Imphdmllci5jYWRlckBnbWFpbC5jb20iLCJpYXQiOjE3MTI0NzgxMjd9.RiRHb-5G5DrMxvcJF3SLDiz2j6sfamYyYPmNPWhGrWw"
+
+const { data } = Astro.props as Props;
+
+let categoryName: string = "";
+
+const categoryResponse = await fetch(
+  `${import.meta.env.PUBLIC_CRUD_API_URL}/categories/${data.category_id}`,
+  {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+    },
+  }
+);
+
+if (categoryResponse.ok) {
+  const category: ICategory = await categoryResponse.json();
+  categoryName = category.name;
+} else {
+  console.error("Failed to fetch category:", categoryResponse.statusText);
+}
+---
+
+<div class="menu_card">
+  <div class="menu_image">
+    <Image src={`${import.meta.env.PUBLIC_IMAGE_API_URL}/server/recipe-images/${data.id}` ?? PlaceHolder} alt={data.name} height={300} width={245} />
+  </div>
+
+  <div class="small_card">
+    <i class="fa-solid fa-heart interactive-icon"></i>
+  </div>
+
+  <div class="menu_info">
+    <h2 class="dish-name">{data.name}</h2>
+    <p class="dish-description">
+      {data.description}
+    </p>
+    <h3 class="category-name">{categoryName}</h3>
+    <a href="#" class="menu_btn">Cook Now</a>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+---
+import { Image } from "astro:assets";
+import logo from "../../assets/images/logo.png";
+
+const cmsUrl: string = import.meta.env.PUBLIC_CMS_URL;
+
+---
+<nav>
+  <div class="logo">
+    <Image src={logo} alt="Webiste Cooking Logo" height={50} width={200} />
+  </div>
+
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/recipes">Menu</a></li>
+    <li><a href="/categories">Categories</a></li>
+  </ul>
+
+  <div class="icon">
+    <a href={cmsUrl}>
+      <i class="fa-solid fa-user"></i>
+    </a>
+  </div>
+</nav>
