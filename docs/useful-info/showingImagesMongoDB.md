@@ -32,3 +32,11 @@ cliente.connect().then(() => {
     console.error('Error al conectar a MongoDB:', error);
 });
 ```
+### 4. Consulta de la base de datos:
+- Utiliza métodos de MongoDB para TypeScript, como findOne o find, para recuperar los documentos que contienen las imágenes que deseas mostrar.
+```
+const db = cliente.db(dbName);
+const coleccion = db.collection<Imagen>('nombre_de_la_coleccion');
+
+const imagen = await coleccion.findOne({ _id: 'id_de_la_imagen' });
+```
