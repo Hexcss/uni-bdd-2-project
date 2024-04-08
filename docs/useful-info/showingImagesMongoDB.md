@@ -16,3 +16,19 @@ interface Imagen {
     // Otros campos opcionales
 }
 ```
+### 3. Conexión a la base de datos:
+- Utiliza el cliente MongoDB para TypeScript para conectarte a tu base de datos MongoDB.
+```
+import { MongoClient } from 'mongodb';
+
+const url = 'mongodb://localhost:27017';
+const dbName = 'nombre_de_la_base_de_datos';
+
+const cliente = new MongoClient(url);
+
+cliente.connect().then(() => {
+    console.log('Conexión a MongoDB establecida correctamente');
+}).catch(error => {
+    console.error('Error al conectar a MongoDB:', error);
+});
+```
