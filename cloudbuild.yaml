@@ -1,0 +1,53 @@
+steps:
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'Preparegustus-image-apiArchive'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        touch gustus-image-api.tar.gz
+        tar --exclude=gustus-image-api.tar.gz --exclude='.git' --exclude='node_modules' -zcvf gustus-image-api.tar.gz .
+
+  # Step 2: Copy the archive to the Compute Engine instance
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'CopyArchive'
+    args:
+      - compute
+      - scp
+      - gustus-image-api.tar.gz
+      - '$_GCE_USERNAME@$_GCE_INSTANCE:~/'
+      - --zone=$_GCE_ZONE
+      - --project=$_PROJECT_ID
+
+  # Step 3: SSH into the instance, unpack the archive, and set up the environment
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'SetupAndDeploy'
+    args:
+      - compute
+      - ssh
+      - '$_GCE_USERNAME@$_GCE_INSTANCE'
+      - '--zone=$_GCE_ZONE'
+      - '--command'
+      - |
+        rm -r ~/gustus-image-api && \
+        mkdir -p ~/gustus-image-api && \
+        tar -zxvf ~/gustus-image-api.tar.gz -C ~/gustus-image-api && \
+        cd ~/gustus-image-api && \
+        sudo docker compose down && \
+        sudo docker compose up --build -d
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'Cleanup'
+    args:
+      - compute
+      - ssh
+      - '$_GCE_USERNAME@$_GCE_INSTANCE'
+      - '--zone=$_GCE_ZONE'
+      - '--command'
+      - |
+        rm ~/gustus-image-api.tar.gz
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+timeout: '1600s'
+
