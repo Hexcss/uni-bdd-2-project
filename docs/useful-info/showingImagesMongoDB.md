@@ -40,3 +40,33 @@ const coleccion = db.collection<Imagen>('nombre_de_la_coleccion');
 
 const imagen = await coleccion.findOne({ _id: 'id_de_la_imagen' });
 ```
+
+### 5. Mostrar la imagen:
+- Utiliza el framework web de tu elección (por ejemplo, Express.js) para configurar una ruta que maneje las solicitudes para mostrar imágenes.
+- Convierte los datos binarios de la imagen en Base64.
+- Responde con una etiqueta < img > en HTML que incluya la URL Base64 de la imagen.
+```
+import express from 'express';
+
+const app = express();
+
+app.get('/imagen/:id', async (req, res) => {
+    const imagenId = req.params.id;
+    const imagen = await coleccion.findOne({ _id: imagenId });
+
+    if (!imagen) {
+        res.status(404).send('Imagen no encontrada');
+        return;
+    }
+
+    const imagenBase64 = imagen.imagen.toString('base64');
+    const imagenDataUrl = `data:image/jpeg;base64,${imagenBase64}`;
+
+    res.send(`<img src="${imagenDataUrl}" alt="Imagen">`);
+});
+
+app.listen(3000, () => {
+    console.log('Servidor escuchando en el puerto 3000');
+});
+```
+
