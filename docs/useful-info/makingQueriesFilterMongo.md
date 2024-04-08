@@ -39,3 +39,11 @@ const resultados = await coleccion.find(filtro).toArray();
 
 console.log('Resultados de la consulta:', resultados);
 ```
+
+### 5. Utilización de operadores de comparación:
+- Puedes utilizar operadores de comparación como $eq, $gt, $lt, $gte, $lte, etc., para realizar consultas más específicas.
+```
+// Ejemplo de consulta con filtro usando operadores de comparación
+const filtro = { edad: { $gte: 18 } };
+const resultados = await coleccion.find(filtro).toArray();
+```
