@@ -60,3 +60,6 @@ const filtro = {
 };
 const resultados = await coleccion.find(filtro).toArray();
 ```
+
+### 7. Verificación:
+- Verifica los resultados de la consulta para asegurarte de que estén de acuerdo con los criterios de filtro especificados.
