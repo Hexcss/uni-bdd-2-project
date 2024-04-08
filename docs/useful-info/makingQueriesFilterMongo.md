@@ -47,3 +47,16 @@ console.log('Resultados de la consulta:', resultados);
 const filtro = { edad: { $gte: 18 } };
 const resultados = await coleccion.find(filtro).toArray();
 ```
+
+### 6. Combinación de condiciones:
+- Puedes combinar múltiples condiciones utilizando los operadores lógicos $and, $or, $nor, etc.
+```
+// Ejemplo de consulta con filtro utilizando operadores lógicos
+const filtro = {
+    $and: [
+        { edad: { $gte: 18 } },
+        { ciudad: 'Barcelona' }
+    ]
+};
+const resultados = await coleccion.find(filtro).toArray();
+```
