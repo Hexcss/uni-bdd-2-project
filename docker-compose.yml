@@ -1,0 +1,119 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "3015:27017"
+    volumes:
+      - .mongo/data/db:/data/db
+      - .mongo/config/mongod.conf:/etc/mongo/mongod.conf
+    networks:
+      - app-network
+
+  api-images:
+    build:
+      context: ./api-images
+      dockerfile: Dockerfile.development
+    volumes:
+      - ./api-images:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3014:3014"
+    depends_on:
+      - mongodb
+    environment:
+      - NODE_ENV=development
+      - PORT=3014
+      - MONGO_URI=mongodb://gustus-admin:RONCelADvInEynEthoLiTE@mongodb:27017/gustus?authSource=gustus&authMechanism=SCRAM-SHA-256
+      - JWT_KEY=awJek1901sLa
+    networks:
+      - app-network
+
+  api-auth:
+    build:
+      context: ./api-auth
+      dockerfile: Dockerfile.development
+    volumes:
+      - ./api-auth:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3012:3012"
+    depends_on:
+      - mongodb
+    environment:
+      - NODE_ENV=development
+      - PORT=3012
+      - MONGO_URI=mongodb://gustus-admin:RONCelADvInEynEthoLiTE@mongodb:27017/gustus?authSource=gustus&authMechanism=SCRAM-SHA-256
+      - JWT_KEY=awJek1901sLa
+      - JWT_EXPIRATION=1d
+      - SALT_ROUNDS=13
+    networks:
+      - app-network
+
+  api-crud:
+    build:
+      context: ./api-crud
+      dockerfile: Dockerfile.development
+    volumes:
+      - ./api-crud:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3013:3013"
+    depends_on:
+      - mongodb
+    environment:
+      - NODE_ENV=development
+      - PORT=3013
+      - MONGO_URI=mongodb://gustus-admin:RONCelADvInEynEthoLiTE@mongodb:27017/gustus?authSource=gustus&authMechanism=SCRAM-SHA-256
+      - JWT_KEY=awJek1901sLa
+    networks:
+      - app-network
+
+  front-landing:
+    build:
+      context: ./front-landing
+      dockerfile: Dockerfile.development
+    volumes:
+      - ./front-landing:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3010:3010"
+    depends_on:
+      - api-crud
+      - api-images
+    environment:
+      - NODE_ENV=development
+      - PUBLIC_AUTH_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjE0ZDE2MjBhODkyZGFmZDE1MGVhNzAiLCJlbWFpbCI6Imphdmllci5jYWRlckBnbWFpbC5jb20iLCJpYXQiOjE3MTI2NDA0MjR9.ucTPQ1yiD2yok0EIIoCBTNNlpcCvsqgM8PQIU49ieFM
+      - PUBLIC_CRUD_API_URL=http://api-crud:3013/api
+      - PUBLIC_IMAGE_API_URL=http://api-images:3014/api
+      - PUBLIC_CMS_URL=http://front-cms:3011
+      - HOST=0.0.0.0 
+    networks:
+      - app-network
+
+  front-cms:
+    build:
+      context: ./front-cms
+      dockerfile: Dockerfile.development
+    volumes:
+      - ./front-cms:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3011:3011"
+    depends_on:
+      - api-crud
+      - api-images
+      - api-auth
+    environment:
+      - NODE_ENV=development
+      - VITE_AUTH_API_URL=http://api-auth:3012/api
+      - VITE_CRUD_API_URL=http://api-crud:3013/api
+      - VITE_IMAGE_API_URL=http://api-images:3014/api
+      - VITE_SECRET_KEY=3BGT+p5+nslyLG7ZlnMuBPKoRcoEjObUe0dkP8oO8So=
+      - HOST=0.0.0.0 
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

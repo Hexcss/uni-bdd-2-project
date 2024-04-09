@@ -1404,3 +1404,94 @@
 05-04-2024 21:20:12 [info]: Connected to MongoDB  
 05-04-2024 21:20:21 [info]: Connected to MongoDB  
 05-04-2024 21:20:23 [info]: Connected to MongoDB  
+09-04-2024 04:51:22 [error]: Could not connect to MongoDB Authentication failed.  
+09-04-2024 04:54:22 [info]: Connected to MongoDB  
+09-04-2024 04:55:52 [info]: Connected to MongoDB  
+09-04-2024 04:56:53 [info]: Connected to MongoDB  
+09-04-2024 05:04:21 [info]: Connected to MongoDB  
+09-04-2024 05:05:47 [info]: Connected to MongoDB  
+09-04-2024 05:09:27 [info]: Connected to MongoDB  
+09-04-2024 05:10:41 [info]: Connected to MongoDB  
+09-04-2024 05:11:07 [info]: 2024-04-09T05:11:07.394Z [GET]: / Status: 404 6.831ms  
+09-04-2024 05:19:24 [info]: Connected to MongoDB  
+09-04-2024 05:20:06 [info]: 2024-04-09T05:20:06.067Z [GET]: / Status: 404 5.361ms  
+09-04-2024 05:27:52 [info]: Connected to MongoDB  
+09-04-2024 05:29:33 [info]: Connected to MongoDB  
+09-04-2024 05:33:18 [info]: Connected to MongoDB  
+09-04-2024 08:03:04 [error]: Could not connect to MongoDB connect ECONNREFUSED 127.0.0.1:3015  
+09-04-2024 08:04:25 [error]: Could not connect to MongoDB connect ECONNREFUSED 127.0.0.1:3015  
+09-04-2024 08:17:45 [error]: Could not connect to MongoDB connect ECONNREFUSED 127.0.0.1:3015  
+09-04-2024 08:20:26 [info]: Connected to MongoDB  
+09-04-2024 08:21:28 [info]: 2024-04-09T06:21:28.202Z [GET]: /api/recipe-images Status: 404 3.681ms  
+09-04-2024 08:21:32 [info]: 2024-04-09T06:21:32.804Z [GET]: /api/category-images Status: 404 0.673ms  
+09-04-2024 08:21:33 [info]: 2024-04-09T06:21:33.818Z [GET]: /api/category-images Status: 404 0.934ms  
+09-04-2024 08:21:35 [info]: 2024-04-09T06:21:35.834Z [GET]: /api/category-images Status: 404 1.785ms  
+09-04-2024 08:21:39 [info]: 2024-04-09T06:21:39.865Z [GET]: /api/category-images Status: 404 1.418ms  
+09-04-2024 08:21:48 [info]: Image uploaded for category s8BnAgfpsr: Vector background.webp  
+09-04-2024 08:21:48 [info]: 2024-04-09T06:21:48.597Z [POST]: /api/category-images Status: 201 36.684ms  
+09-04-2024 08:24:43 [info]: Connected to MongoDB  
+09-04-2024 08:25:48 [info]: 2024-04-09T06:25:48.219Z [GET]: /api/server/recipe-images/uSkBMJOSiO Status: 200 12.457ms  
+09-04-2024 08:25:48 [info]: 2024-04-09T06:25:48.222Z [GET]: /api/server/recipe-images/recipe0001 Status: 200 29.017ms  
+09-04-2024 08:25:48 [info]: 2024-04-09T06:25:48.233Z [GET]: /api/server/category-images/glpCg31biX Status: 200 9.575ms  
+09-04-2024 08:25:48 [info]: 2024-04-09T06:25:48.236Z [GET]: /api/server/category-images/705tANPCUM Status: 200 7.520ms  
+09-04-2024 08:25:48 [info]: 2024-04-09T06:25:48.243Z [GET]: /api/server/recipe-images/lgPD00oPj7 Status: 200 34.737ms  
+09-04-2024 08:25:48 [info]: 2024-04-09T06:25:48.246Z [GET]: /api/server/category-images/KL5FHSCIdx Status: 200 15.268ms  
+09-04-2024 08:25:48 [info]: 2024-04-09T06:25:48.987Z [GET]: /api/server/recipe-images/recipe0001 Status: 304 9.058ms  
+09-04-2024 08:25:48 [info]: 2024-04-09T06:25:48.989Z [GET]: /api/server/recipe-images/uSkBMJOSiO Status: 304 9.703ms  
+09-04-2024 08:25:48 [info]: 2024-04-09T06:25:48.991Z [GET]: /api/server/recipe-images/lgPD00oPj7 Status: 304 11.236ms  
+09-04-2024 08:25:48 [info]: 2024-04-09T06:25:48.994Z [GET]: /api/server/category-images/glpCg31biX Status: 304 10.945ms  
+09-04-2024 08:25:49 [info]: 2024-04-09T06:25:49.001Z [GET]: /api/server/category-images/705tANPCUM Status: 304 16.535ms  
+09-04-2024 08:25:49 [info]: 2024-04-09T06:25:49.003Z [GET]: /api/server/category-images/KL5FHSCIdx Status: 304 17.438ms  
+09-04-2024 08:25:53 [info]: 2024-04-09T06:25:53.811Z [GET]: /api/server/category-images/zfjVgZXUXl Status: 404 10.940ms  
+09-04-2024 08:25:53 [info]: 2024-04-09T06:25:53.814Z [GET]: /api/server/category-images/R0hI6IWxac Status: 404 10.435ms  
+09-04-2024 08:25:53 [info]: 2024-04-09T06:25:53.818Z [GET]: /api/server/category-images/Ys09zbtBeA Status: 404 10.490ms  
+09-04-2024 08:25:58 [info]: 2024-04-09T06:25:58.089Z [GET]: /api/server/category-images/glpCg31biX Status: 304 8.059ms  
+09-04-2024 08:25:58 [info]: 2024-04-09T06:25:58.092Z [GET]: /api/server/category-images/705tANPCUM Status: 304 9.175ms  
+09-04-2024 08:25:58 [info]: 2024-04-09T06:25:58.097Z [GET]: /api/server/category-images/KL5FHSCIdx Status: 304 14.124ms  
+09-04-2024 08:25:58 [info]: 2024-04-09T06:25:58.109Z [GET]: /api/server/category-images/zfjVgZXUXl Status: 404 14.496ms  
+09-04-2024 08:25:58 [info]: 2024-04-09T06:25:58.115Z [GET]: /api/server/category-images/0Cg5gNCY8U Status: 200 12.330ms  
+09-04-2024 08:25:58 [info]: 2024-04-09T06:25:58.120Z [GET]: /api/server/category-images/796LRE75iW Status: 200 21.269ms  
+09-04-2024 08:25:58 [info]: 2024-04-09T06:25:58.122Z [GET]: /api/server/category-images/I7VsDEmb3g Status: 404 10.164ms  
+09-04-2024 08:25:58 [info]: 2024-04-09T06:25:58.124Z [GET]: /api/server/category-images/R0hI6IWxac Status: 404 18.563ms  
+09-04-2024 08:25:58 [info]: 2024-04-09T06:25:58.127Z [GET]: /api/server/category-images/Ys09zbtBeA Status: 404 9.786ms  
+09-04-2024 08:25:59 [info]: 2024-04-09T06:25:59.824Z [GET]: /api/server/category-images/55Q0MgTZoc Status: 404 2.163ms  
+09-04-2024 08:26:00 [info]: 2024-04-09T06:26:00.922Z [GET]: /api/server/category-images/glpCg31biX Status: 304 10.938ms  
+09-04-2024 08:26:00 [info]: 2024-04-09T06:26:00.925Z [GET]: /api/server/category-images/705tANPCUM Status: 304 11.142ms  
+09-04-2024 08:26:00 [info]: 2024-04-09T06:26:00.926Z [GET]: /api/server/category-images/KL5FHSCIdx Status: 304 10.408ms  
+09-04-2024 08:26:00 [info]: 2024-04-09T06:26:00.928Z [GET]: /api/server/category-images/796LRE75iW Status: 304 10.876ms  
+09-04-2024 08:26:00 [info]: 2024-04-09T06:26:00.929Z [GET]: /api/server/category-images/0Cg5gNCY8U Status: 304 11.245ms  
+09-04-2024 08:26:00 [info]: 2024-04-09T06:26:00.930Z [GET]: /api/server/category-images/zfjVgZXUXl Status: 404 11.045ms  
+09-04-2024 08:26:00 [info]: 2024-04-09T06:26:00.938Z [GET]: /api/server/category-images/R0hI6IWxac Status: 404 6.328ms  
+09-04-2024 08:26:00 [info]: 2024-04-09T06:26:00.939Z [GET]: /api/server/category-images/Ys09zbtBeA Status: 404 4.945ms  
+09-04-2024 08:26:00 [info]: 2024-04-09T06:26:00.941Z [GET]: /api/server/category-images/I7VsDEmb3g Status: 404 4.856ms  
+09-04-2024 08:26:03 [info]: 2024-04-09T06:26:03.189Z [GET]: /api/server/category-images/705tANPCUM Status: 304 6.600ms  
+09-04-2024 08:26:03 [info]: 2024-04-09T06:26:03.190Z [GET]: /api/server/category-images/KL5FHSCIdx Status: 304 6.815ms  
+09-04-2024 08:26:03 [info]: 2024-04-09T06:26:03.191Z [GET]: /api/server/category-images/796LRE75iW Status: 304 7.154ms  
+09-04-2024 08:26:03 [info]: 2024-04-09T06:26:03.193Z [GET]: /api/server/category-images/0Cg5gNCY8U Status: 304 7.687ms  
+09-04-2024 08:26:03 [info]: 2024-04-09T06:26:03.194Z [GET]: /api/server/category-images/glpCg31biX Status: 304 12.554ms  
+09-04-2024 08:26:03 [info]: 2024-04-09T06:26:03.195Z [GET]: /api/server/category-images/zfjVgZXUXl Status: 404 7.780ms  
+09-04-2024 08:26:03 [info]: 2024-04-09T06:26:03.200Z [GET]: /api/server/category-images/Ys09zbtBeA Status: 404 3.021ms  
+09-04-2024 08:26:03 [info]: 2024-04-09T06:26:03.202Z [GET]: /api/server/category-images/R0hI6IWxac Status: 404 5.735ms  
+09-04-2024 08:26:03 [info]: 2024-04-09T06:26:03.203Z [GET]: /api/server/category-images/I7VsDEmb3g Status: 404 4.800ms  
+09-04-2024 08:26:04 [info]: 2024-04-09T06:26:04.583Z [GET]: /api/server/recipe-images/recipe0001 Status: 304 5.034ms  
+09-04-2024 08:26:04 [info]: 2024-04-09T06:26:04.584Z [GET]: /api/server/recipe-images/uSkBMJOSiO Status: 304 4.520ms  
+09-04-2024 08:26:04 [info]: 2024-04-09T06:26:04.586Z [GET]: /api/server/recipe-images/lgPD00oPj7 Status: 304 5.135ms  
+09-04-2024 08:26:06 [info]: 2024-04-09T06:26:06.561Z [GET]: /api/server/category-images/glpCg31biX Status: 304 8.611ms  
+09-04-2024 08:26:06 [info]: 2024-04-09T06:26:06.562Z [GET]: /api/server/category-images/705tANPCUM Status: 304 8.686ms  
+09-04-2024 08:26:06 [info]: 2024-04-09T06:26:06.564Z [GET]: /api/server/category-images/KL5FHSCIdx Status: 304 9.313ms  
+09-04-2024 08:26:06 [info]: 2024-04-09T06:26:06.566Z [GET]: /api/server/category-images/796LRE75iW Status: 304 8.849ms  
+09-04-2024 08:26:06 [info]: 2024-04-09T06:26:06.567Z [GET]: /api/server/category-images/0Cg5gNCY8U Status: 304 9.288ms  
+09-04-2024 08:26:06 [info]: 2024-04-09T06:26:06.568Z [GET]: /api/server/category-images/zfjVgZXUXl Status: 404 9.637ms  
+09-04-2024 08:26:06 [info]: 2024-04-09T06:26:06.573Z [GET]: /api/server/category-images/R0hI6IWxac Status: 404 3.623ms  
+09-04-2024 08:26:06 [info]: 2024-04-09T06:26:06.574Z [GET]: /api/server/category-images/Ys09zbtBeA Status: 404 3.568ms  
+09-04-2024 08:26:06 [info]: 2024-04-09T06:26:06.576Z [GET]: /api/server/category-images/I7VsDEmb3g Status: 404 4.254ms  
+09-04-2024 08:26:08 [info]: 2024-04-09T06:26:08.238Z [GET]: /api/server/recipe-images/recipe0001 Status: 304 3.506ms  
+09-04-2024 08:26:10 [info]: 2024-04-09T06:26:10.006Z [GET]: /api/server/recipe-images/recipe0001 Status: 304 7.865ms  
+09-04-2024 08:26:10 [info]: 2024-04-09T06:26:10.007Z [GET]: /api/server/recipe-images/uSkBMJOSiO Status: 304 7.780ms  
+09-04-2024 08:26:10 [info]: 2024-04-09T06:26:10.008Z [GET]: /api/server/recipe-images/lgPD00oPj7 Status: 304 7.839ms  
+09-04-2024 08:26:10 [info]: 2024-04-09T06:26:10.011Z [GET]: /api/server/category-images/glpCg31biX Status: 304 8.673ms  
+09-04-2024 08:26:10 [info]: 2024-04-09T06:26:10.012Z [GET]: /api/server/category-images/705tANPCUM Status: 304 9.034ms  
+09-04-2024 08:26:10 [info]: 2024-04-09T06:26:10.013Z [GET]: /api/server/category-images/KL5FHSCIdx Status: 304 9.211ms  
+09-04-2024 08:26:10 [info]: 2024-04-09T06:26:10.771Z [GET]: /api/server/category-images/zfjVgZXUXl Status: 404 5.042ms  
+09-04-2024 08:26:10 [info]: 2024-04-09T06:26:10.772Z [GET]: /api/server/category-images/R0hI6IWxac Status: 404 5.073ms  
+09-04-2024 08:26:10 [info]: 2024-04-09T06:26:10.774Z [GET]: /api/server/category-images/Ys09zbtBeA Status: 404 5.944ms  

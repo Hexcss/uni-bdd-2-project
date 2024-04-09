@@ -11,3 +11,7 @@
 05-04-2024 01:26:24 [error]: Error uploading image for category 705tANPCUM: CategoryImage validation failed: imageData: Path `imageData` is required.  
 05-04-2024 01:26:58 [error]: Error uploading image for category 705tANPCUM: CategoryImage validation failed: imageData: Path `imageData` is required.  
 05-04-2024 01:27:32 [error]: Error uploading image for category 705tANPCUM: CategoryImage validation failed: imageData: Path `imageData` is required.  
+09-04-2024 04:51:22 [error]: Could not connect to MongoDB Authentication failed.  
+09-04-2024 08:03:04 [error]: Could not connect to MongoDB connect ECONNREFUSED 127.0.0.1:3015  
+09-04-2024 08:04:25 [error]: Could not connect to MongoDB connect ECONNREFUSED 127.0.0.1:3015  
+09-04-2024 08:17:45 [error]: Could not connect to MongoDB connect ECONNREFUSED 127.0.0.1:3015  
